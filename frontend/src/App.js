@@ -1,4 +1,5 @@
 import "./App.css";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
@@ -7,6 +8,7 @@ function App() {
     {/* <Navbar/> */}
     {/* <Login/> */}
     {/* <DatePicker/> */}
+    <HomePage/>
     </div>
   );
 }
