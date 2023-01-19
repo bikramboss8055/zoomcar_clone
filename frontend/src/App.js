@@ -1,18 +1,26 @@
 import { Text } from "@chakra-ui/react";
 import "./App.css";
-import Car from "./components/Car-pages/Car";
-import Navbar from "./components/Navbar";
-import AllRoutes from "./routes/AllRoutes";
 
+import DatePicker from "./components/DatePicker";
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
+import SignUp from "./components/SignUp";
+import Login from "./components/Login";
+import Location from "./components/Location";
+// import Location from "./components/Location";
 
 function App() {
   return (
-    <div className="App">
-   
-
-
- 
+    <div>
     
+    <Navbar/>
+    {/* <SignUp/> */}
+    {/* <Login/> */}
+    {/* <Location/> */}
+    {/* <DatePicker/> */}
+    {/* <HomePage/> */}
+
+
     </div>
   );
 }

@@ -1,0 +1,71 @@
+
+
+.Apppp {
+  width: 90%;
+  margin: 0rem auto;
+  height: 484px;
+}
+
+.slide img {
+  width: 50rem;
+  margin: 0 auto;
+  height: 480px;
+}
+
+.slide {
+  transform: scale(0.4);
+  transition: transform 500ms;
+  opacity: 0.5;
+}
+
+.activeSlide {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.arrow {
+  background-color: #fff;
+  position: absolute;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.arrow svg {
+  transition: color 300ms;
+}
+
+.arrow svg:hover {
+  color: #68edff;
+}
+
+.next {
+  right: 0%;
+  top: 50%;
+}
+
+.prev {
+  left: 0%;
+  top: 50%;
+}
+
+
+@media screen and (max-width: 900px) {
+  .Apppp {
+    height: 350px;
+  }
+
+  .slide img {
+    height: 346px;
+  }
+}
+
+@media screen and (max-width: 430) {
+  .Apppp {
+    height: 270px;
+  }
+
+  .slide img {
+    height: 366px;
+    width:10rem
+  }
+}

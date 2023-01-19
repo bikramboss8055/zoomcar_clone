@@ -13,12 +13,17 @@ const carSchema=mongoose.Schema({
     rating:{type:Number,required:true},
     km:{type:String,required:true},
     location:{type:String,required:true},
-    owner:{type:String,required:true}
+    owner:{type:String,required:true},
+    sellerId:{type:mongoose.Schema.Types.ObjectId,ref:"auth"},
     
+},{
+    versionKey : false,
+    timestamps : true
 })
 
 const CarModel=mongoose.model("car",carSchema)
 
 module.exports={
-    CarModel
+    CarModel 
 }
+
