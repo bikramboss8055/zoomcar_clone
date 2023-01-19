@@ -3,6 +3,7 @@ const cors = require("cors");
 const { connection } = require("./config/connection");
 const { carRouter } = require("./routes/Car.route");
 const { authRouter } = require("./routes/Auth.route");
+const { bookingRouter } = require("./routes/Booking.route");
 require("dotenv").config();
 
 const app = express();
@@ -15,6 +16,7 @@ app.get("/", async (req, res) => {
 
 app.use("/cars", carRouter);
 app.use('/authentication',authRouter)
+app.use('/booking',bookingRouter);
 
 
 app.listen(process.env.port, async () => {

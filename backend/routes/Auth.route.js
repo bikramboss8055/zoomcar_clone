@@ -16,6 +16,7 @@ authRouter.post(
     body("last_name", "Enter Your Last Name").not().isEmpty(),
     body("email", "Enter a valid email").isEmail(),
     body("city", "Enter Your City Name").not().isEmpty(),
+    body("age", "Enter Your Age").not().isEmpty(),
     body("password", "password must be at least 3 Characters long").isLength({
       min: 3,
     }), // password must be at least 3 chars long
@@ -38,7 +39,7 @@ authRouter.post(
         email,
         password,
         city,
-
+        age,
         mobile,
         isAdmin,
         isUser,
@@ -71,6 +72,7 @@ authRouter.post(
         password: hashPassword,
         city,
         mobile,
+        age,
         isSeller,
         isUser,
         isAdmin,

@@ -24,6 +24,7 @@ function DatePicker() {
       key: "selection",
     },
   ]);
+  console.log(state)
   return (
     <div>
       <Box align="center" mt="40px">
