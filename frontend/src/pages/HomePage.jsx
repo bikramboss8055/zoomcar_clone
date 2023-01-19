@@ -1,19 +1,48 @@
-import { Box, Heading, Image } from '@chakra-ui/react'
+import { Box, Center, Flex, Heading, Image } from '@chakra-ui/react'
 import React from 'react'
 import Slider from '../components/Slider'
+import Slider2 from '../components/Slider2'
 import "../CSS/HomePage.css"
 import firstimg from "../img/firstimg.png"
 
 const HomePage = () => {
     return (
-        <Box>
-            <Box style={{ border: "1px solid red",height:"660px" }}>
-                <Image h={"100%"} w={"100%"} src={firstimg}/>
-                <Box  w={"40%"} style={{ border: "1px solid red",position:"absolute",top:"20%",left:"50%", transform:"translate(-50%)"}}>
-                    <Heading style={{background:"rgba(0,0,0,0.4)"}} padding="20px" size='xl'>The perfect car for your next trip is just around the corner</Heading>
-                </Box>
+        <Box bg={"#f5f5f5"}>
+            <Box h={660} style={{ border: "1px solid red" }}>
+                <Image h={"100%"} w={"100%"} src={firstimg} />
+                <Center w={[360, 480, 700, 900, 1100]} p={30} style={{ background: "rgba(0,0,0,0.4)", border: "1px solid red", position: "absolute", top: "60px", left: "50%", transform: "translate(-50%)" }}>
+                    <Flex flexDirection={'column'}>
+                        <Box><Heading color={"white"} margin="0" size={["md", "lg", 'xl']}>The perfect car for your next trip is just around the corner</Heading></Box>
+                        <Center><Box><Heading color={"white"} margin="0" size={["md", "lg", 'lg']}>Book your drive now!</Heading></Box></Center>
+                    </Flex>
+                </Center>
             </Box>
-            <Slider/>
+
+            <Center style={{ height: "140px", }}>
+
+                <Heading fontWeight="" fontSize={["lg", "3xl", "3xl", '4xl']} >CHOOSE FROM OUR WIDE RANGE OF CARS</Heading>
+
+            </Center>
+
+            <Slider2 />
+            
+            <Box style={{ height: "130px", marginTop:"12px" }}>
+                <Center p={30}>
+                    <Flex flexDirection={'column'}>
+                        <Box><Heading color={"black"} fontWeight="" margin="0" size={["md", "lg", 'xl']}>UNMATCHED BENEFITS</Heading></Box>
+                        <Center><Box><Heading color={"black"} fontWeight="xl" margin="0" size={["md", "md", 'md']}>Drive everywhere with freedom</Heading></Box></Center>
+                    </Flex>
+                </Center>
+            </Box>
+
+            <Slider />
+
+            
+
+
+
+
+
         </Box>
     )
 }

@@ -21,7 +21,7 @@ import caro5 from "../img/caro5.png"
 const Slider = () => {
   const responsive = {
     D: {
-      breakpoint: { max: 1860, min: 975 },
+      breakpoint: { max: 2000, min: 975 },
       items: 5
     },
     LD: {
