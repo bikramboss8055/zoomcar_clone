@@ -13,7 +13,8 @@ import { TfiArrowCircleLeft, TfiArrowCircleRight } from "react-icons/tfi";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Box, Image } from "@chakra-ui/react";
-const images = [car1, car2, car3, car4,car5, car6, car7, car8];
+import { Link } from "react-router-dom";
+const images = [car1, car2, car3, car4, car5, car6, car7, car8];
 
 function Slider2() {
   const NextArrow = ({ onClick }) => {
@@ -51,7 +52,9 @@ function Slider2() {
       <Slider {...settings}>
         {images.map((img, idx) => (
           <Box className={idx === imageIndex ? "slide activeSlide" : "slide"}>
-            <Image src={img} alt={img} />
+            <Link>
+              <Image src={img} alt={img} />
+            </Link>
           </Box>
         ))}
       </Slider>

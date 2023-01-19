@@ -11,6 +11,7 @@ import {
 import React from 'react'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { Link } from 'react-router-dom';
 import caro1 from "../img/caro1.png"
 import caro2 from "../img/caro2.png"
 import caro3 from "../img/caro3.png"
@@ -81,30 +82,32 @@ const Slider = () => {
   return (
     <Box w={"100%"} margin="auto" mt={8} >
       <Carousel responsive={responsive}  >
-        {offer.map((e,i) => {
+        {offer.map((e, i) => {
           return (
-            <Box key={i}  w={[250,250, 250, 250, 290]} margin="auto" spacing={"auto"} mt={5}  >
-              <Box  bg="white" borderRadius={8}>
+            <Box key={i} w={[250, 250, 250, 250, 290]} margin="auto" spacing={"auto"} mt={5}  >
+              <Box bg="white" borderRadius={8}>
                 <Center height={"100%"} >
-                  <Image
-                    src={e.image}
-                    alt="Green double couch with wooden legs"
-                    borderRadius="sm"
+                  <Link>
+                    <Image
+                      src={e.image}
+                      alt="Green double couch with wooden legs"
+                      borderRadius="sm"
 
-                    height={"85%"}
-                    
-                  />
+                      height={"85%"}
+
+                    />
+                  </Link>
                 </Center>
-                
-                  <Heading
-                    size="xl"
-                    color={"white"}
-                    position={'absolute'}
-                    bottom="40px"
-                  >
-                    {e.name}
-                  </Heading>
-                
+
+                <Heading
+                  size="xl"
+                  color={"white"}
+                  position={'absolute'}
+                  bottom="40px"
+                >
+                  {e.name}
+                </Heading>
+
                 <Divider />
               </Box>
             </Box>
