@@ -1,0 +1,36 @@
+
+
+.mainDiv{
+    border:1px solid yellow;
+    margin-top:30px;
+    height:auto
+
+    
+}
+.mainfilterBox{
+   
+}
+
+.filterBox{
+    /* border:1px solid red; */
+    width:88%;
+    height:auto;
+    margin-left: 12%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+   
+}
+.filterOne{
+    border:1px solid white;
+    height: auto;
+    width: 92%;
+    margin: auto;
+
+   
+    
+}
+
+  /* *********************** Car div css  **********************/
+
+.imagBox{
+    background-image: url("https://www.zoomcar.com/img/marketplace-background.png");
+}

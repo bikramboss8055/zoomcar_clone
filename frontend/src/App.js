@@ -1,4 +1,6 @@
+import { Text } from "@chakra-ui/react";
 import "./App.css";
+
 import DatePicker from "./components/DatePicker";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
@@ -17,6 +19,7 @@ function App() {
     {/* <Location/> */}
     {/* <DatePicker/> */}
     {/* <HomePage/> */}
+
 
     </div>
   );
