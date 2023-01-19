@@ -48,7 +48,7 @@ const Slider = () => {
     },
     {
       image: caro2,
-      name: "Zero Security Deposit"
+      name: "Zero Security"
     },
     {
       image: caro3,
@@ -72,7 +72,7 @@ const Slider = () => {
     },
     {
       image: caro2,
-      name: "Zero Security Deposit"
+      name: "Zero Security"
     }
 
   ];
