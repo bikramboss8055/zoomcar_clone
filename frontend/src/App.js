@@ -18,7 +18,7 @@ function App() {
     {/* <Login/> */}
     {/* <Location/> */}
     {/* <DatePicker/> */}
-    {/* <HomePage/> */}
+    <HomePage/>
 
 
     </div>
