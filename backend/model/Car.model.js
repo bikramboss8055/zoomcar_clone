@@ -11,7 +11,7 @@ const carSchema=mongoose.Schema({
     seat:{type:Number,required:true},
     cartype:{type:String,required:true},
     rating:{type:Number,required:true},
-    km:{type:String,required:true},
+    km:{type:Number,required:true},
     location:{type:String,required:true},
     owner:{type:String,required:true},
     sellerId:{type:mongoose.Schema.Types.ObjectId,ref:"auth"},
