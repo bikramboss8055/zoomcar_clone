@@ -7,7 +7,7 @@ import HomePage from "./pages/HomePage";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Location from "./components/Location";
-// import Location from "./components/Location";
+import CheckoutPage from "./components/CheckoutPage";
 
 function App() {
   return (
@@ -15,10 +15,13 @@ function App() {
     
     <Navbar/>
     {/* <SignUp/> */}
+    
     {/* <Login/> */}
     {/* <Location/> */}
     {/* <DatePicker/> */}
     {/* <HomePage/> */}
+    {/* <Checkout/> */}
+    {/* <CheckoutPage/> */}
 
 
     </div>
