@@ -45,7 +45,7 @@ const Slider = () => {
   const offer = [
     {
       image: caro1,
-      name: "Enjoy Unlimited kilometers"
+      name: "Enjoy Unlimited"
     },
     {
       image: caro2,
@@ -53,7 +53,7 @@ const Slider = () => {
     },
     {
       image: caro3,
-      name: "100% Free Cancelation"
+      name: "Free Cancelation"
     },
     {
       image: caro4,
@@ -65,7 +65,7 @@ const Slider = () => {
     },
     {
       image: caro1,
-      name: "Enjoy Unlimited kilometers"
+      name: "Enjoy kilometers"
     },
     {
       image: caro5,
@@ -100,7 +100,8 @@ const Slider = () => {
                 </Center>
 
                 <Heading
-                  size="xl"
+                  paddingLeft="20px"
+                  fontSize={["2xl","3xl"]}
                   color={"white"}
                   position={'absolute'}
                   bottom="40px"
