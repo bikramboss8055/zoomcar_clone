@@ -1,4 +1,5 @@
 import "./App.css";
+import Admin from "./pages/Admin";
 // import HomePage from "./pages/HomePage";
 import MyAccount from "./pages/MyAccount";
 
@@ -8,7 +9,8 @@ function App() {
       {/* <Navbar/> */}
       {/* <Login/> */}
       {/* <DatePicker/> */}
-      <MyAccount />
+      {/* <MyAccount /> */}
+      <Admin />
     </div>
   );
 }
