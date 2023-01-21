@@ -7,21 +7,29 @@ import HomePage from "./pages/HomePage";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Location from "./components/Location";
+
+import AllRoutes from "./routes/AllRoutes";
+import Footer from "./components/Footer";
+
 import CheckoutPage from "./components/CheckoutPage";
+
 
 function App() {
   return (
     <div>
     
     <Navbar/>
-    {/* <SignUp/> */}
+    <AllRoutes/>
+    <Footer/>
     
+    {/* <SignUp/> */}
     {/* <Login/> */}
     {/* <Location/> */}
     {/* <DatePicker/> */}
     {/* <HomePage/> */}
     {/* <Checkout/> */}
     {/* <CheckoutPage/> */}
+
 
 
     </div>
