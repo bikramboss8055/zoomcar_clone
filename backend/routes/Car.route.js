@@ -192,9 +192,39 @@ carRouter.post(
 carRouter.get('/allcars',async(req, res) => {
 
     try {
-        let {page=1}= req.query;
+
+
+        let {page=1,price,km,rating, seat, transmission, fueltype}= req.query;
+
         let limit= 10;
-        let allcars= await CarModel.find().limit(limit).skip(limit*(page-1))
+        let sortcondition = {};
+        if(price == "asc"){
+          sortcondition.price = 1;
+        }else if(price == "desc"){
+          sortcondition.price = -1;
+        }
+
+        if(rating == "asc"){
+          sortcondition.rating = 1;
+        }else if(rating == "desc"){
+          sortcondition.rating = -1;
+        }
+
+        let sortKm = {};
+        if(km){
+          sortKm = {km : {$lte : km}}
+        }
+        if(seat){
+          sortKm.seat = seat;
+        }
+        if(transmission){
+          sortKm.transmission = transmission;
+        }
+        if(fueltype){
+          sortKm.fueltype = fueltype;
+        }
+        
+        let allcars= await CarModel.find(sortKm).limit(limit).skip(limit*(page-1)).sort(sortcondition);
         res.send(allcars)
     } catch (error) {
         res
@@ -205,7 +235,7 @@ carRouter.get('/allcars',async(req, res) => {
 
 // seller can see only his cars
 
-carRouter.get('seller/addedcars', VarifyToken, async(req, res) => {
+carRouter.get('/seller/addedcars', VarifyToken, async(req, res) => {
 
     
     try {
@@ -225,8 +255,25 @@ carRouter.get('seller/addedcars', VarifyToken, async(req, res) => {
     }
 })
 
+carRouter.patch('/seller/updatecar/:id',async(req, res) => {
+  try {
+      let carid= req.params.id;
+      console.log('carid: ', carid);
+      let payload= req.body
+      await CarModel.findByIdAndUpdate({_id: carid},payload)
+      res.send({msg:"car updated successfully"})
+  } catch (error) {
+      res
+      .status(500)
+      .send({ msg: "Somthing Went Wrong In updating cars", error });
+  }
+  
+  
+  })  
 
-carRouter.delete('seller/deletecar/:id', VarifyToken,async(req, res) => {
+
+
+carRouter.delete('/seller/deletecar/:id', VarifyToken,async(req, res) => {
 try {
     let carid= req.params.id;
     let sellerId= req.authId
@@ -235,11 +282,11 @@ try {
 } catch (error) {
     res
     .status(500)
-    .send({ msg: "Somthing Went Wrong In getting cars", error });
+    .send({ msg: "Somthing Went Wrong In deleting cars", error });
 }
 
 })
 
 module.exports = {
   carRouter,
-};
+}; 

@@ -8,6 +8,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 6;
 const secretKey = process.env.secretKey;
 const { VarifyToken } = require("../middleware/VarifyToken");
+const { BalanceModel } = require("../model/Balace.model");
 
 authRouter.post(
   "/signup",
@@ -77,7 +78,9 @@ authRouter.post(
         isUser,
         isAdmin,
       });
+
       if (createAuth) {
+        await BalanceModel.create({ authId: createAuth._id });
         res.status(200).send({ msg: "Signup Successfully!" });
       }
     } catch (error) {
