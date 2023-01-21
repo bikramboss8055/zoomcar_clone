@@ -7,6 +7,8 @@ import HomePage from "./pages/HomePage";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Location from "./components/Location";
+import AllRoutes from "./routes/AllRoutes";
+import Footer from "./components/Footer";
 // import Location from "./components/Location";
 
 function App() {
@@ -14,11 +16,10 @@ function App() {
     <div>
     
     <Navbar/>
-    {/* <SignUp/> */}
-    {/* <Login/> */}
-    {/* <Location/> */}
-    {/* <DatePicker/> */}
-    {/* <HomePage/> */}
+    <AllRoutes/>
+    <Footer/>
+    
+    
 
 
     </div>
