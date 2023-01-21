@@ -1,0 +1,12 @@
+.card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 70%;
+}
+.singleCard {
+  margin: auto;
+  border-radius: 3%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  height: 29rem;
+}
