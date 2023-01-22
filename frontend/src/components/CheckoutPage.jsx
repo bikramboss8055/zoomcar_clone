@@ -11,15 +11,40 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaCircle,
   FaRegDotCircle,
   FaRegStopCircle,
   FaStopCircle,
 } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 
 function CheckoutPage() {
+  const { car_id } = useParams()
+  const [data, setData] = useState({})
+
+    const getData = async (url) => {
+
+        try {
+            let res = await fetch(url)
+            let carData = await res.json()
+            //console.log(carData)
+            setData(carData)
+
+        } catch (err) {
+            console.log(err)
+
+        }
+
+    };
+
+    useEffect(() => {
+        getData(`https://taupe-dhole-boot.cyclic.app/cars/getcar/${car_id}`)
+
+    }, [car_id])
+
+    console.log(data)
   return (
     <div>
       <Flex mx="100px" mt="30px" justifyContent={"space-between"} gap="10px">
@@ -581,7 +606,7 @@ function CheckoutPage() {
                   letterSpacing="0.16px"
                   color={"#1f1f1f"}
                 >
-                  Maruti Swift MT Petrol
+                 {data.title}
                 </Text>
                 <Flex mt={"7px"} gap="30px">
                   <Flex gap={"5px"}>
@@ -596,7 +621,7 @@ function CheckoutPage() {
                       letterSpacing="0.4px"
                       color={"#666"}
                     >
-                      Manual
+                     {data.transmission}
                     </Text>
                   </Flex>
                   <Flex>
@@ -611,14 +636,14 @@ function CheckoutPage() {
                       letterSpacing="0.4px"
                       color={"#666"}
                     >
-                      Petrol
+                      {data.fueltype}
                     </Text>
                   </Flex>
                 </Flex>
               </Box>
               <Image
                 maxHeight={"100px"}
-                src="https://zoomcar-assets.zoomcar.com/photographs/original/f1850c781ba0aeae715eaa922dc15b4dc3654a09.png?1663874619"
+                src={data.image}
               />
             </Flex>
             <Box p="18px">

@@ -23,11 +23,11 @@ const Car = () => {
     const [searchParams, setSearchParams] = useSearchParams()
     const location = useLocation()
     const dispatch = useDispatch();
-    const cars = useSelector(store => store.cars)
+    const {cars} = useSelector(store => store.car)
     const isLoading = useSelector(store => store.isLoading)
     const isError = useSelector(store => store.isError)
-    console.log(cars, "carsss")
-    console.log(location)
+    // console.log(cars, "carsss")
+    // console.log(location)
 
     // Fetching Data
     useEffect(() => {

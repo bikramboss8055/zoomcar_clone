@@ -44,9 +44,10 @@ function getCars(params){
     return function(dispatch){
         dispatch(getCarRequest())
         return axios
-        .get("http://localhost:8080/cars/allcars",params)
+        .get("https://taupe-dhole-boot.cyclic.app/cars/allcars",params)
         .then((r)=>{
             dispatch(getCarSuccess(r.data));
+            console.log(r.data);
         })
         .catch((e)=>{
             dispatch(getCarError())

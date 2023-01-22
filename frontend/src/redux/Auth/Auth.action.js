@@ -15,10 +15,10 @@ export const authlogin = (loginData) => async (dispatch) => {
         body : JSON.stringify(loginData)
       });
       let data = await res.json();
-      // console.log(data);
-    
-      localStorage.setItem("authToken", data.token);
-      dispatch({ type: auth_login, payload : {token : data.token, msg : data.msg} });
+      console.log(data);
+     console.log(data.response)
+      localStorage.setItem("authToken", JSON.stringify(data));
+      dispatch({ type: auth_login, payload : {token : data.token, msg : data.msg,name : data.name , isAdmin : data.isAdmin,isSeller:data.isSeller} });
       // console.log(res.data);
     //   return res.data;
     } catch (error) {
