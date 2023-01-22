@@ -6,9 +6,15 @@ import {
   Button,
   Box,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { authSignup } from "../redux/Auth/Auth.action";
 
 function SignUp() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -22,11 +28,18 @@ function SignUp() {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
+    console.log(value)
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // handle form submission here
+    dispatch(authSignup(formData))
+
+   navigate('/login')
+   
+    
+
   };
 
   return (
@@ -45,7 +58,7 @@ function SignUp() {
               <FormLabel htmlFor="firstName">First Name</FormLabel>
               <Input
                 id="firstName"
-                name="firstName"
+                name="first_name"
                 type="text"
                 value={formData.first_name}
                 onChange={handleChange}
@@ -55,7 +68,7 @@ function SignUp() {
               <FormLabel htmlFor="lastName">Last Name</FormLabel>
               <Input
                 id="lastName"
-                name="lastName"
+                name="last_name"
                 type="text"
                 value={formData.last_name}
                 onChange={handleChange}

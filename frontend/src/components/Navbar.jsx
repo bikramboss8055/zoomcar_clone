@@ -16,8 +16,11 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 import { IoCallOutline, IoLocationOutline } from "react-icons/io5";
 import { FaUserAlt } from "react-icons/fa";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+    const navigate = useNavigate()
+
   return (
     <div>
       <Box bgColor={"black"}>
@@ -60,6 +63,7 @@ function Navbar() {
                   },
                 }}
                 fontSize="20px"
+                onClick={() => navigate('/login')}
               >
                 Login/SignUp
               </Button>

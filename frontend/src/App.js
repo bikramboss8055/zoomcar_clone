@@ -1,4 +1,3 @@
-import { Text } from "@chakra-ui/react";
 import "./App.css";
 
 import DatePicker from "./components/DatePicker";
@@ -12,26 +11,14 @@ import AllRoutes from "./routes/AllRoutes";
 import Footer from "./components/Footer";
 
 import CheckoutPage from "./components/CheckoutPage";
-
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
     <div>
-    
-    <Navbar/>
-    <AllRoutes/>
-    <Footer/>
-    
-    {/* <SignUp/> */}
-    {/* <Login/> */}
-    {/* <Location/> */}
-    {/* <DatePicker/> */}
-    {/* <HomePage/> */}
-    {/* <Checkout/> */}
-    {/* <CheckoutPage/> */}
-
-
-
+      <Navbar />
+      <AllRoutes />
+      <Footer />
     </div>
   );
 }
