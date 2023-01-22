@@ -20,6 +20,7 @@ import {
   InputRightAddon,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import PopoverForm from "../components/UptadeButton";
 
 const Admin = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -151,7 +152,10 @@ const Admin = () => {
 
   return (
     <>
-      <div style={{ display: "flex", gap: "200px", marginTop: "50px" }}>
+      <div
+        className="motherBox"
+        style={{ display: "flex", gap: "200px", marginTop: "50px" }}
+      >
         <Button leftIcon={<AddIcon />} colorScheme="teal" onClick={onOpen}>
           Add Cars
         </Button>
@@ -347,12 +351,13 @@ const Admin = () => {
                         >
                           Delete
                         </Button>
-                        <Button
+                        {/* <Button
                           style={{ color: "white", background: "forestgreen" }}
                         >
                           {" "}
                           Update
-                        </Button>
+                        </Button> */}
+                        <PopoverForm />
                       </div>
                     </div>
                   </>

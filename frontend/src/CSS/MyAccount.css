@@ -67,8 +67,20 @@
 }
 
 .update {
-  width: 8%;
+  width: 100px;
   border: 1px solid;
   margin: auto;
   text-align: center;
+}
+
+@media screen and (max-width: 680px) {
+  .motherBox {
+    display: grid;
+  }
+  .child1 {
+    width: 100%;
+  }
+  .child2 {
+    width: 100%;
+  }
 }

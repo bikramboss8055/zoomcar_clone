@@ -9,8 +9,8 @@ function App() {
       {/* <Navbar/> */}
       {/* <Login/> */}
       {/* <DatePicker/> */}
-      {/* <MyAccount /> */}
-      <Admin />
+      <MyAccount />
+      {/* <Admin /> */}
     </div>
   );
 }
