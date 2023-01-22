@@ -57,19 +57,32 @@ const Admin = () => {
     };
 
     console.log(payload);
-  };
-
-  const handleDelete = (id) => {
-    fetch(`https://taupe-dhole-boot.cyclic.app/cars/seller/deletecar/${id}`, {
-      method: "DELETE",
+    const { token } = JSON.parse(localStorage.getItem("authToken"));
+    fetch(`https://taupe-dhole-boot.cyclic.app/cars/add`, {
+      method: "POST",
+      body: JSON.stringify(payload),
       headers: {
-        Authorization: localStorage.getItem("authToken"),
+        "Content-type": "application/json",
+        authtoken: token,
       },
     });
   };
 
+  const handleDelete = (id) => {
+    const { token } = JSON.parse(localStorage.getItem("authToken"));
+    console.log(token);
+    fetch(`https://taupe-dhole-boot.cyclic.app/cars/seller/deletecar/${id}`, {
+      method: "DELETE",
+      headers: {
+        authtoken: token,
+      },
+    });
+    window.alert("Car Deleted Successfully");
+    window.location.reload();
+  };
+
   useEffect(() => {
-    fetch("https://taupe-dhole-boot.cyclic.app/cars/allcars")
+    fetch("https://taupe-dhole-boot.cyclic.app/cars/allcars?page=9")
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
@@ -135,6 +148,8 @@ const Admin = () => {
                 <FormLabel htmlFor="desc">Description</FormLabel>
                 <Textarea id="desc" />
               </Box> */}
+                {/* abhra@gmail.com
+              abhra@admin4 */}
 
                 <Box>
                   <FormLabel htmlFor="price">Price</FormLabel>
@@ -143,6 +158,7 @@ const Admin = () => {
                     id="price"
                     placeholder="Price"
                     onChange={(e) => setPrice(e.target.value)}
+                    type="number"
                   />
                 </Box>
 
@@ -153,6 +169,7 @@ const Admin = () => {
                     id="offprice"
                     placeholder="OffPrice"
                     onChange={(e) => setoffPrice(e.target.value)}
+                    type="number"
                   />
                 </Box>
 
@@ -183,6 +200,7 @@ const Admin = () => {
                     id="seat"
                     placeholder="Seat"
                     onChange={(e) => setSeat(e.target.value)}
+                    type="number"
                   />
                 </Box>
 
@@ -203,6 +221,7 @@ const Admin = () => {
                     id="rating"
                     placeholder="Rating"
                     onChange={(e) => setRating(e.target.value)}
+                    type="number"
                   />
                 </Box>
 
@@ -213,6 +232,7 @@ const Admin = () => {
                     id="km"
                     placeholder="Distance"
                     onChange={(e) => setKm(e.target.value)}
+                    type="number"
                   />
                 </Box>
 

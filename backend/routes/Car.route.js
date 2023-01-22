@@ -199,7 +199,6 @@ carRouter.get("/getcar/:id", async (req, res) => {
   }
 });
 
-
 // user can see all the cars
 carRouter.get("/allcars", async (req, res) => {
   try {
@@ -212,7 +211,7 @@ carRouter.get("/allcars", async (req, res) => {
       transmission,
       fueltype,
       location,
-      cartype
+      cartype,
     } = req.query;
 
     let limit = 10;
@@ -229,31 +228,27 @@ carRouter.get("/allcars", async (req, res) => {
       sortcondition.rating = -1;
     }
 
+    let sortKm = {};
+    if (km) {
+      sortKm = { km: { $lte: km } };
+    }
+    if (seat) {
+      sortKm.seat = seat;
+    }
+    if (transmission) {
+      sortKm.transmission = transmission;
+    }
+    if (fueltype) {
+      sortKm.fueltype = fueltype;
+    }
+    if (cartype) {
+      sortKm.cartype = cartype;
+    }
 
-       
-
-        let sortKm = {};
-        if(km){
-          sortKm = {km : {$lte : km}}
-        }
-        if(seat){
-          sortKm.seat = seat;
-        }
-        if(transmission){
-          sortKm.transmission = transmission;
-        }
-        if(fueltype){
-          sortKm.fueltype = fueltype;
-        }
-        if(cartype){
-          sortKm.cartype = cartype;
-        }
-        
-   
-    if(location){
+    if (location) {
       sortKm.location = location;
     }
-    if(cartype){
+    if (cartype) {
       sortKm.cartype = cartype;
     }
 
@@ -301,19 +296,13 @@ carRouter.patch("/seller/updatecar/:id", async (req, res) => {
   }
 });
 
-
-
-
-
-
-
-carRouter.delete('/seller/deletecar/:id', VarifyToken,async(req, res) => {
-try {
-    let carid= req.params.id;
-    let sellerId= req.authId
-    await CarModel.findByIdAndDelete({_id: carid,sellerId})
-    res.send({msg:"car deleted successfully"})
-} catch (error) {
+// carRouter.delete('/seller/deletecar/:id', VarifyToken,async(req, res) => {
+// try {
+//     let carid= req.params.id;
+//     let sellerId= req.authId
+//     await CarModel.findByIdAndDelete({_id: carid,sellerId})
+//     res.send({msg:"car deleted successfully"})
+// } catch (error) {
 
 carRouter.delete("/seller/deletecar/:id", VarifyToken, async (req, res) => {
   try {
@@ -322,7 +311,6 @@ carRouter.delete("/seller/deletecar/:id", VarifyToken, async (req, res) => {
     await CarModel.findByIdAndDelete({ _id: carid, sellerId });
     res.send({ msg: "car deleted successfully" });
   } catch (error) {
-
     res
       .status(500)
       .send({ msg: "Somthing Went Wrong In deleting cars", error });
