@@ -22,9 +22,9 @@ const AllRoutes = () => {
         <Route
           path="/car/:car_id"
           element={
-            <PrivateRoute>
+           
               <Singlecar />
-            </PrivateRoute>
+           
           }
         ></Route>
         <Route

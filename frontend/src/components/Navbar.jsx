@@ -39,9 +39,16 @@ function Navbar() {
             <Box>
               <Hamburg />
             </Box>
-            <Box >
+
+
+           
+
+
+            <Box cursor="pointer">
               <Image
-                onClick={handleHome}
+              
+              onClick={handleHome}
+
                 src="https://i.ibb.co/6m3XQ8d/Quick-cars-Logoaaaa.png"
                 h={"80px"}
                 w={"180px"}

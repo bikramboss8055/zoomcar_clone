@@ -302,20 +302,6 @@ carRouter.patch("/seller/updatecar/:id", async (req, res) => {
 });
 
 
-// by ID
-
-  carRouter.get("/:id", async (req, res) => {
-  let ID = req.params.id;
-
-  try {
-    const car = await CarModel.findById({ _id: ID });
-    res.send(car);
-  } catch (err) {
-    console.log(err);
-    res.send({ msg: "Error Coming While GET BY ID Request" });
-    res.status(404).send(err.message);
-  }
-});
 
 
 
