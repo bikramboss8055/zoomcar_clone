@@ -1,4 +1,7 @@
 import "./App.css";
+import Admin from "./pages/Admin";
+// import HomePage from "./pages/HomePage";
+import MyAccount from "./pages/MyAccount";
 
 import DatePicker from "./components/DatePicker";
 import Navbar from "./components/Navbar";
@@ -16,9 +19,11 @@ import PrivateRoute from "./components/PrivateRoute";
 function App() {
   return (
     <div>
+
       <Navbar />
       <AllRoutes />
       <Footer />
+
     </div>
   );
 }
