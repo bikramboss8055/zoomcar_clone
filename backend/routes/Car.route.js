@@ -140,9 +140,9 @@ carRouter.post(
       }
 
       let id = req.authId;
-      let isAuth= await AuthModel.findOne({ _id: id });
-      if(!isAuth.isSeller){
-        res.status(401).send({msg:"you dont have permission to add cars"})
+      let isAuth = await AuthModel.findOne({ _id: id });
+      if (!isAuth.isSeller) {
+        res.status(401).send({ msg: "you dont have permission to add cars" });
       }
 
       let {
@@ -158,7 +158,6 @@ carRouter.post(
         km,
         location,
       } = req.body;
-     
 
       // any filed are empty throw Error
 
@@ -174,24 +173,44 @@ carRouter.post(
         rating,
         km,
         location,
-        sellerId:id,
-        owner: `${isAuth.first_name} ${isAuth.last_name}`
+        sellerId: id,
+        owner: `${isAuth.first_name} ${isAuth.last_name}`,
       });
 
       if (createCar) {
         res.status(200).send({ msg: "Car Added Successfully!" });
       }
     } catch (error) {
-      res
-        .status(500)
-        .send({ msg: "Somthing Went Wrong In Car add", error });
+      res.status(500).send({ msg: "Somthing Went Wrong In Car add", error });
     }
   }
 );
 // user can see all the cars
-carRouter.get('/allcars',async(req, res) => {
+carRouter.get("/allcars", async (req, res) => {
+  try {
+    let {
+      page = 1,
+      price,
+      km,
+      rating,
+      seat,
+      transmission,
+      fueltype,
+    } = req.query;
 
-    try {
+    let limit = 10;
+    let sortcondition = {};
+    if (price == "asc") {
+      sortcondition.price = 1;
+    } else if (price == "desc") {
+      sortcondition.price = -1;
+    }
+
+    if (rating == "asc") {
+      sortcondition.rating = 1;
+    } else if (rating == "desc") {
+      sortcondition.rating = -1;
+    }
 
 
         let {page=1,price,km,rating, seat, transmission, fueltype,cartype}= req.query;
@@ -233,46 +252,53 @@ carRouter.get('/allcars',async(req, res) => {
         res
         .status(500)
         .send({ msg: "Somthing Went Wrong In getting cars", error });
+
     }
-})
+
+    let allcars = await CarModel.find(sortKm)
+      .limit(limit)
+      .skip(limit * (page - 1))
+      .sort(sortcondition);
+    res.send(allcars);
+  } catch (error) {
+    res.status(500).send({ msg: "Somthing Went Wrong In getting cars", error });
+  }
+});
 
 // seller can see only his cars
 
-carRouter.get('/seller/addedcars', VarifyToken, async(req, res) => {
-
-    
-    try {
-        let isAuth= await AuthModel.findOne({_id:req.authId})
-        if(!isAuth.isSeller){
-            res.status(401).send({msg:'you are not authorized to see'})
-        }
-
-        let {page=1}= req.query;
-        let limit= 10;
-        let allcars= await CarModel.find({_id:isAuth._id}).limit(limit).skip(limit*(page-1))
-        res.send(allcars)
-    } catch (error) {
-        res
-        .status(500)
-        .send({ msg: "Somthing Went Wrong In getting cars", error }); 
-    }
-})
-
-carRouter.patch('/seller/updatecar/:id',async(req, res) => {
+carRouter.get("/seller/addedcars", VarifyToken, async (req, res) => {
   try {
-      let carid= req.params.id;
-      console.log('carid: ', carid);
-      let payload= req.body
-      await CarModel.findByIdAndUpdate({_id: carid},payload)
-      res.send({msg:"car updated successfully"})
+    let isAuth = await AuthModel.findOne({ _id: req.authId });
+    if (!isAuth.isSeller) {
+      res.status(401).send({ msg: "you are not authorized to see" });
+    }
+
+    let { page = 1 } = req.query;
+    let limit = 10;
+    let allcars = await CarModel.find({ _id: isAuth._id })
+      .limit(limit)
+      .skip(limit * (page - 1));
+    res.send(allcars);
   } catch (error) {
-      res
+    res.status(500).send({ msg: "Somthing Went Wrong In getting cars", error });
+  }
+});
+
+carRouter.patch("/seller/updatecar/:id", async (req, res) => {
+  try {
+    let carid = req.params.id;
+
+    let payload = req.body;
+    await CarModel.findByIdAndUpdate({ _id: carid }, payload);
+    res.send({ msg: "car updated successfully" });
+  } catch (error) {
+    res
       .status(500)
       .send({ msg: "Somthing Went Wrong In updating cars", error });
   }
-  
-  
-  })  
+});
+
 
 // by ID
 
@@ -300,13 +326,21 @@ try {
     await CarModel.findByIdAndDelete({_id: carid,sellerId})
     res.send({msg:"car deleted successfully"})
 } catch (error) {
-    res
-    .status(500)
-    .send({ msg: "Somthing Went Wrong In deleting cars", error });
-}
 
-})
+carRouter.delete("/seller/deletecar/:id", VarifyToken, async (req, res) => {
+  try {
+    let carid = req.params.id;
+    let sellerId = req.authId;
+    await CarModel.findByIdAndDelete({ _id: carid, sellerId });
+    res.send({ msg: "car deleted successfully" });
+  } catch (error) {
+
+    res
+      .status(500)
+      .send({ msg: "Somthing Went Wrong In deleting cars", error });
+  }
+});
 
 module.exports = {
   carRouter,
-}; 
+};

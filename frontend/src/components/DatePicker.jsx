@@ -20,18 +20,31 @@ function DatePicker() {
   const [state, setState] = useState([
     {
       startDate: new Date(),
-      endDate: addDays(new Date(), 7),
+      endDate: addDays(new Date(), 3),
       key: "selection",
     },
   ]);
-  console.log(state[0].startDate);
-  console.log(state[0].endDate);
+
+  const handleSelect = (item) => {
+    const daysSelected = (
+      item.selection.endDate - item.selection.startDate
+    ) / (1000 * 60 * 60 * 24);
+    console.log("Number of days selected: ", daysSelected+1);
+    setState([item.selection]);
+  };
+
+  
+//   const arpit = new Date(state[0].startDate)
+//   console.log(arpit)
+//   console.log(Date())
+//   console.log(state[0].startDate);
+//   console.log(state[0].endDate);
   return (
     <div>
       <Box align="center" mt="40px">
         <Box>
           <DateRange
-            onChange={(item) => setState([item.selection])}
+            onChange={handleSelect}
             editableDateInputs={true}
             showSelectionPreview={true}
             moveRangeOnFirstSelection={false}
@@ -39,12 +52,6 @@ function DatePicker() {
             ranges={state}
             direction="horizontal"
           />
-          {/* <DateRange
-        editableDateInputs={true}
-        onChange={(item) => setState([item.selection])}
-        moveRangeOnFirstSelection={false}
-        ranges={state}
-      /> */}
         </Box>
         <Box align="center" w="750px" mt="40px">
           <Flex justifyContent="space-around" mb="30px">
@@ -88,7 +95,7 @@ function SliderThumbWithTooltip() {
         <SliderMark
           value={sliderValue}
           textAlign="center"
-          colorScheme="green"
+          colorscheme="green"
           bg="green"
           color="white"
           mt="-10"
@@ -98,16 +105,6 @@ function SliderThumbWithTooltip() {
           {sliderValue}.00
         </SliderMark>
       </SliderThumb>
-      {/* <Tooltip
-          hasArrow
-          bg='teal.500'
-          color='white'
-          placement='top'
-          isOpen={showTooltip}
-          label={`${sliderValue}.00`}
-        >
-          <SliderThumb />
-        </Tooltip> */}
     </Slider>
   );
 }

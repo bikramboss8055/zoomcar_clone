@@ -1,0 +1,28 @@
+.card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 70%;
+}
+.singleCard {
+  border-radius: 3%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  height: 32rem;
+  width: 20rem;
+}
+
+@media screen and (max-width: 680px) {
+  .card {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .motherBox {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .card {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
