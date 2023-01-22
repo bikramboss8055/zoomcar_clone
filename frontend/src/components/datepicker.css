@@ -1,0 +1,10 @@
+@media (max-width: 600px) {
+    .date-range {
+      .react-daterange-picker__month {
+        display: none;
+      }
+      .react-daterange-picker__month:first-child {
+        display: block;
+      }
+    }
+  }

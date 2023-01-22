@@ -28,11 +28,11 @@ const AllRoutes = () => {
           }
         ></Route>
         <Route
-          path="/datepicker/:car_id"
+          path="/datepicker"
           element={
-            <PrivateRoute>
+            // <PrivateRoute>
               <DatePicker />
-            </PrivateRoute>
+            // </PrivateRoute>
           }
         ></Route>
         <Route
