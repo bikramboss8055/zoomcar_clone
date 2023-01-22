@@ -59,6 +59,15 @@ const Admin = () => {
     console.log(payload);
   };
 
+  const handleDelete = (id) => {
+    fetch(`https://taupe-dhole-boot.cyclic.app/cars/seller/deletecar/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: localStorage.getItem("authToken"),
+      },
+    });
+  };
+
   useEffect(() => {
     fetch("https://taupe-dhole-boot.cyclic.app/cars/allcars")
       .then((res) => res.json())
@@ -266,6 +275,7 @@ const Admin = () => {
                       >
                         <Button
                           style={{ color: "white", background: "crimson" }}
+                          onClick={() => handleDelete(ele._id)}
                         >
                           Delete
                         </Button>
