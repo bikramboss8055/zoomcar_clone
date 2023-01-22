@@ -185,6 +185,21 @@ carRouter.post(
     }
   }
 );
+
+// // Get by Id
+
+carRouter.get("/getcar/:id", async (req, res) => {
+  let ID = req.params.id;
+
+  try {
+    const car = await CarModel.findById({ _id: ID });
+    res.send(car);
+  } catch (err) {
+    res.status(500).send({ msg: "Somthing Went Wrong In getting car", err });
+  }
+});
+
+
 // user can see all the cars
 carRouter.get("/allcars", async (req, res) => {
   try {
@@ -196,6 +211,8 @@ carRouter.get("/allcars", async (req, res) => {
       seat,
       transmission,
       fueltype,
+      location,
+      cartype
     } = req.query;
 
     let limit = 10;
@@ -253,6 +270,12 @@ carRouter.get("/allcars", async (req, res) => {
         .status(500)
         .send({ msg: "Somthing Went Wrong In getting cars", error });
 
+    }
+    if(location){
+      sortKm.location = location;
+    }
+    if(cartype){
+      sortKm.cartype = cartype;
     }
 
     let allcars = await CarModel.find(sortKm)
