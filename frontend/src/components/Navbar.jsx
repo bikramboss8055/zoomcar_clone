@@ -12,6 +12,7 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { CgMenuBoxed } from "react-icons/cg";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { IoCallOutline, IoLocationOutline } from "react-icons/io5";
@@ -41,6 +42,19 @@ function Navbar() {
             <Box>
               <Hamburg />
             </Box>
+
+            <Link to="/">
+              <Box>
+                <Image
+                  src="https://i.ibb.co/6m3XQ8d/Quick-cars-Logoaaaa.png"
+                  h={"80px"}
+                  w={"180px"}
+                />
+              </Box>
+
+            </Link>
+
+
             <Box >
               <Image
               onClick={handleHome}
@@ -49,6 +63,7 @@ function Navbar() {
                 w={"180px"}
               />
             </Box>
+
           </HStack>
           <Flex
             w={400}

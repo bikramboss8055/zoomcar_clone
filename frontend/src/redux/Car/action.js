@@ -28,16 +28,31 @@ const getCarError=()=>{
 
 
 
-const getCars=(dispatch)=>{
-    dispatch(getCarRequest())
-    axios.get("http://localhost:8080/cars/allcars")
-    .then((r)=>{
-        dispatch(getCarSuccess(r.data))
-        console.log(r.data)
-    })
-    .catch((e)=>{
-        dispatch(getCarError());
-    });
+// const getCars=(dispatch)=>{
+//     dispatch(getCarRequest())
+//     axios.get("http://localhost:8080/cars/allcars",)
+//     .then((r)=>{
+//         dispatch(getCarSuccess(r.data))
+//         console.log(r.data)
+//     })
+//     .catch((e)=>{
+//         dispatch(getCarError());
+//     });
+// }
+
+function getCars(params){
+    return function(dispatch){
+        dispatch(getCarRequest())
+        return axios
+        .get("http://localhost:8080/cars/allcars",params)
+        .then((r)=>{
+            dispatch(getCarSuccess(r.data));
+        })
+        .catch((e)=>{
+            dispatch(getCarError())
+        })
+    }
+
 }
 
 // const getCarsbyId=(car_id)=(dispatch)=>{
@@ -53,6 +68,6 @@ const getCars=(dispatch)=>{
 // }
 
 
-export {getCarError,getCarRequest,getCarSuccess,getCars}
+export {getCarError,getCarRequest,getCarSuccess,getCars }
 
 

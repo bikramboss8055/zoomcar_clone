@@ -212,18 +212,47 @@ carRouter.get("/allcars", async (req, res) => {
       sortcondition.rating = -1;
     }
 
-    let sortKm = {};
-    if (km) {
-      sortKm = { km: { $lte: km } };
-    }
-    if (seat) {
-      sortKm.seat = seat;
-    }
-    if (transmission) {
-      sortKm.transmission = transmission;
-    }
-    if (fueltype) {
-      sortKm.fueltype = fueltype;
+
+        let {page=1,price,km,rating, seat, transmission, fueltype,cartype}= req.query;
+
+        let limit= 10;
+        let sortcondition = {};
+        if(price == "asc"){
+          sortcondition.price = 1;
+        }else if(price == "desc"){
+          sortcondition.price = -1;
+        }
+
+        if(rating == "asc"){
+          sortcondition.rating = 1;
+        }else if(rating == "desc"){
+          sortcondition.rating = -1;
+        }
+
+        let sortKm = {};
+        if(km){
+          sortKm = {km : {$lte : km}}
+        }
+        if(seat){
+          sortKm.seat = seat;
+        }
+        if(transmission){
+          sortKm.transmission = transmission;
+        }
+        if(fueltype){
+          sortKm.fueltype = fueltype;
+        }
+        if(cartype){
+          sortKm.cartype = cartype;
+        }
+        
+        let allcars= await CarModel.find(sortKm).limit(limit).skip(limit*(page-1)).sort(sortcondition);
+        res.send(allcars)
+    } catch (error) {
+        res
+        .status(500)
+        .send({ msg: "Somthing Went Wrong In getting cars", error });
+
     }
 
     let allcars = await CarModel.find(sortKm)
@@ -270,6 +299,34 @@ carRouter.patch("/seller/updatecar/:id", async (req, res) => {
   }
 });
 
+
+// by ID
+
+  carRouter.get("/:id", async (req, res) => {
+  let ID = req.params.id;
+
+  try {
+    const car = await CarModel.findById({ _id: ID });
+    res.send(car);
+  } catch (err) {
+    console.log(err);
+    res.send({ msg: "Error Coming While GET BY ID Request" });
+    res.status(404).send(err.message);
+  }
+});
+
+
+
+
+
+carRouter.delete('/seller/deletecar/:id', VarifyToken,async(req, res) => {
+try {
+    let carid= req.params.id;
+    let sellerId= req.authId
+    await CarModel.findByIdAndDelete({_id: carid,sellerId})
+    res.send({msg:"car deleted successfully"})
+} catch (error) {
+
 carRouter.delete("/seller/deletecar/:id", VarifyToken, async (req, res) => {
   try {
     let carid = req.params.id;
@@ -277,6 +334,7 @@ carRouter.delete("/seller/deletecar/:id", VarifyToken, async (req, res) => {
     await CarModel.findByIdAndDelete({ _id: carid, sellerId });
     res.send({ msg: "car deleted successfully" });
   } catch (error) {
+
     res
       .status(500)
       .send({ msg: "Somthing Went Wrong In deleting cars", error });
