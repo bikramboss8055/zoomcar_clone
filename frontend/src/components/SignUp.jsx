@@ -36,9 +36,7 @@ function SignUp() {
     // handle form submission here
     dispatch(authSignup(formData))
 
-   
-   
-    
+    navigate('/login')
 
   };
 
