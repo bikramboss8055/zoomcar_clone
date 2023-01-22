@@ -10,6 +10,7 @@ import {
   Text,
   Tooltip,
 } from "@chakra-ui/react";
+// import './datepicker.css'
 import { addDays } from "date-fns";
 import React, { useState } from "react";
 import { DateRange, DateRangePicker } from "react-date-range";
@@ -51,6 +52,7 @@ function DatePicker() {
             months={2}
             ranges={state}
             direction="horizontal"
+            className="date-range"
           />
         </Box>
         <Box align="center" w="750px" mt="40px">
