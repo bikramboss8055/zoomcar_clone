@@ -158,7 +158,7 @@ const HomePage = () => {
             </Box>
 
 
-            <Footer />
+            
 
 
         </Box>

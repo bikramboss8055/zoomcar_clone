@@ -194,7 +194,7 @@ carRouter.get('/allcars',async(req, res) => {
     try {
 
 
-        let {page=1,price,km,rating, seat, transmission, fueltype}= req.query;
+        let {page=1,price,km,rating, seat, transmission, fueltype,cartype}= req.query;
 
         let limit= 10;
         let sortcondition = {};
@@ -222,6 +222,9 @@ carRouter.get('/allcars',async(req, res) => {
         }
         if(fueltype){
           sortKm.fueltype = fueltype;
+        }
+        if(cartype){
+          sortKm.cartype = cartype;
         }
         
         let allcars= await CarModel.find(sortKm).limit(limit).skip(limit*(page-1)).sort(sortcondition);
@@ -270,6 +273,23 @@ carRouter.patch('/seller/updatecar/:id',async(req, res) => {
   
   
   })  
+
+// by ID
+
+  carRouter.get("/:id", async (req, res) => {
+  let ID = req.params.id;
+
+  try {
+    const car = await CarModel.findById({ _id: ID });
+    res.send(car);
+  } catch (err) {
+    console.log(err);
+    res.send({ msg: "Error Coming While GET BY ID Request" });
+    res.status(404).send(err.message);
+  }
+});
+
+
 
 
 

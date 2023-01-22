@@ -16,29 +16,70 @@ import "./Car.css"
 import { ArrowRightIcon, PhoneIcon, Search2Icon, SearchIcon } from '@chakra-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCars } from '../../redux/Car/action'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { Loading } from './Loading'
 
 const Filter = () => {
-    const [category, setCategory] = useState([])
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    const initialPrice = searchParams.getAll("price")
+    console.log(initialPrice[0])
+
+    const initialFuel = searchParams.getAll("fuel")
+    console.log(initialFuel[0])
+
+    const initialCarType = searchParams.getAll("cartype")
+    console.log(initialCarType[0])
+
+    const initialCarSeat = searchParams.getAll("seat")
+    console.log(initialCarSeat[0])
+
+    const initialTranse = searchParams.getAll("transmission")
+    console.log(initialTranse[0])
+
+    const initialRating = searchParams.getAll("ratings")
+    console.log(initialRating[0])
+
+
+    const [price, setPrice] = useState(initialPrice[0] || "")
+    const [fuel, setFuel] = useState(initialFuel[0] || "")
+    const [cartype, setCarType] = useState(initialCarType[0] || "")
+    const [seat, setSeats] = useState(initialCarSeat[0] || "")
+    const [transmission, setTransmission] = useState(initialTranse[0] || "")
+    const [ratings, setRatings] = useState(initialRating[0] || "")
+
+
+    //Filter By Fuel 
 
 
 
-    const handleFilterCheckbox = (e) => {
-        const newCategories = [...category];
 
-        if (newCategories.includes(e.target.value)) {
-            // remove it
-            newCategories.splice(newCategories.indexOf(e.target.value), 1)
+
+
+    useEffect(() => {
+        let params = {}
+        if (price) {
+            params.price = price;
         }
-        else {
-            newCategories.push(e.target.value)
+        if (fuel) {
+            params.fuel = fuel
         }
-        setCategory(newCategories)
-    }
+        if (cartype) {
+            params.cartype = cartype
+        }
+        if (seat) {
+            params.seat = seat
+        }
+        if (transmission) {
+            params.transmission = transmission
+        }
+        if (ratings) {
+            params.ratings = ratings
+        }
 
-    console.log(category)
+        setSearchParams(params)
 
+    }, [price, fuel, cartype, seat, ratings, transmission, setSearchParams])
 
 
 
@@ -75,37 +116,49 @@ const Filter = () => {
 
                             </Box>
                             <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center"  >
-                                <Box h="auto" marginTop="8px" cursor='pointer' >
-                                    <Box display="flex" justifyContent="space-evenly" w="auto">
-                                        <BiRupee style={{ height: "30px", width: "25px", }} />
-                                        <AiOutlineArrowUp style={{ height: "30px", width: "25px", }} />
+                                <button onClick={() => setPrice("desc")}>
+                                    <Box h="auto" marginTop="8px" cursor='pointer' >
+                                        <Box display="flex" justifyContent="space-evenly" w="auto">
+                                            <BiRupee style={{ height: "30px", width: "25px", }} />
+                                            <AiOutlineArrowUp style={{ height: "30px", width: "25px", }} />
+
+                                        </Box>
+
+                                        <Text fontWeight="600" fontSize='13.5px' as="b">High to Low</Text>
 
                                     </Box>
 
-                                    <Text fontWeight="600" fontSize='13.5px' as="b">High to Low</Text>
+                                </button>
 
-                                </Box>
 
                             </Box>
                             <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center"  >
-                                <Box h="auto" marginTop="8px" cursor='pointer' >
-                                    <Box display="flex" justifyContent="space-evenly" w="auto">
-                                        <BiRupee style={{ height: "30px", width: "25px", }} />
-                                        <AiOutlineArrowDown style={{ height: "30px", width: "25px", }} />
+                                <button onClick={() => setPrice("asc")}>
+                                    <Box h="auto" marginTop="8px" cursor='pointer' >
+                                        <Box display="flex" justifyContent="space-evenly" w="auto">
+                                            <BiRupee style={{ height: "30px", width: "25px", }} />
+                                            <AiOutlineArrowDown style={{ height: "30px", width: "25px", }} />
+
+                                        </Box>
+
+                                        <Text fontWeight="600" fontSize='13.5px' as="b">Low to High</Text>
 
                                     </Box>
 
-                                    <Text fontWeight="600" fontSize='13.5px' as="b">Low to High</Text>
 
-                                </Box>
+                                </button>
 
                             </Box>
                             <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center"  >
-                                <Box h="auto" marginTop="8px" cursor='pointer' >
-                                    <AiOutlineStar style={{ height: "30px", width: "40px", margin: "auto" }} />
-                                    <Text fontWeight="600" fontSize='13.5px' as="b">Best Rated</Text>
 
-                                </Box>
+                                <button onClick={() => setRatings("desc")}>
+                                    <Box h="auto" marginTop="8px" cursor='pointer' >
+                                        <AiOutlineStar style={{ height: "30px", width: "40px", margin: "auto" }} />
+                                        <Text fontWeight="600" fontSize='13.5px' as="b">Best Rated</Text>
+
+                                    </Box>
+                                </button>
+
 
                             </Box>
                             <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center"  >
@@ -192,62 +245,46 @@ const Filter = () => {
 
                     <Box marginTop="25px" h="auto"  >
                         <SimpleGrid gap={2} columns={{ base: 1, sm: 2, md: 3, lg: 4 }}>
-                            <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center"
-                                // value="Hatchback"
-                                // onClick="handleFilterCheckbox()"
+                            <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center">
+                                <button onClick={() => setCarType("Hatchback")}>
+                                    <Box h="auto" marginTop="8px" cursor='pointer' >
+                                        <FaCarSide style={{ height: "30px", width: "40px", margin: "auto" }} />
+                                        <Text fontWeight="600" fontSize='13.5px' as="b">Hatchback</Text>
 
-                            >
-
-                                <Box h="auto" marginTop="8px" cursor='pointer' >
-                                    <FaCarSide style={{ height: "30px", width: "40px", margin: "auto" }} />
-                                    <Text fontWeight="600" fontSize='13.5px' as="b">Hatchback</Text>
-
-                                </Box>
-
-
-
-
-
+                                    </Box>
+                                </button>
 
                             </Box>
 
-                            <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center"
-                                // value="Sedan"
-                                // onClick={handleFilterCheckbox}
-                            >
+                            <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center">
 
-                                <Box h="auto" marginTop="8px" cursor='pointer' >
-                                    <IoCarSportSharp style={{ height: "30px", width: "40px", margin: "auto" }} />
-                                    <Text fontWeight="600" fontSize='13.5px' as="b">Sedan</Text>
+                                <button onClick={() => setCarType("Sedan")}>
+                                    <Box h="auto" marginTop="8px" cursor='pointer' >
+                                        <IoCarSportSharp style={{ height: "30px", width: "40px", margin: "auto" }} />
+                                        <Text fontWeight="600" fontSize='13.5px' as="b">Sedan</Text>
 
-                                </Box>
+                                    </Box>
 
-
+                                </button>
 
                             </Box>
 
 
-                            <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center"
-                                // value="SUV"
-                                // onClick={handleFilterCheckbox}
-                            >
-                                <Box h="auto" marginTop="8px" cursor='pointer' >
-                                    <IoCarSport style={{ height: "30px", width: "40px", margin: "auto" }} />
-                                    <Text fontWeight="600" fontSize='13.5px' as="b">SUV</Text>
+                            <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center">
+                                <button onClick={() => setCarType("SUV")}>
+                                    <Box h="auto" marginTop="8px" cursor='pointer' >
+                                        <IoCarSport style={{ height: "30px", width: "40px", margin: "auto" }} />
+                                        <Text fontWeight="600" fontSize='13.5px' as="b">SUV</Text>
 
-                                </Box>
+                                    </Box>
+
+                                </button>
+
 
                             </Box>
-                            <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center"
-                                // value="Luxury"
-                                // onClick={handleFilterCheckbox}
-                            >
-                                <button
-                                // type="submit"
-                                // value="Luxury"
-                                // onClick={handleFilterCheckbox}
-                                
-                                >
+                            <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center">
+
+                                <button onClick={() => setCarType("Luxury")}>
                                     <Box h="auto" marginTop="8px" cursor='pointer' >
                                         <IoCarSportOutline style={{ height: "30px", width: "40px", margin: "auto" }} />
                                         <Text fontWeight="600" fontSize='13.5px' as="b">Luxury</Text>
@@ -255,7 +292,7 @@ const Filter = () => {
                                     </Box>
 
                                 </button>
-                               
+
 
                             </Box>
 
@@ -273,12 +310,14 @@ const Filter = () => {
                     <Box marginTop="25px" h="auto"  >
                         <SimpleGrid gap={2} columns={{ base: 1, sm: 2, md: 3, lg: 3 }}>
                             <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center"  >
+                                <button onClick={() => setSeats(4)}>
+                                    <Box h="auto" marginTop="8px" cursor='pointer' >
+                                        <MdAirlineSeatReclineNormal style={{ height: "30px", width: "40px", margin: "auto" }} />
+                                        <Text fontWeight="600" fontSize='13.5px' as="b">4 Seater</Text>
 
-                                <Box h="auto" marginTop="8px" cursor='pointer' >
-                                    <MdAirlineSeatReclineNormal style={{ height: "30px", width: "40px", margin: "auto" }} />
-                                    <Text fontWeight="600" fontSize='13.5px' as="b">4 Seater</Text>
+                                    </Box>
+                                </button>
 
-                                </Box>
 
 
 
@@ -286,11 +325,15 @@ const Filter = () => {
 
                             <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center"  >
 
-                                <Box h="auto" marginTop="8px" cursor='pointer' >
-                                    <MdAirlineSeatReclineNormal style={{ height: "30px", width: "40px", margin: "auto" }} />
-                                    <Text fontWeight="600" fontSize='13.5px' as="b">5 Seater</Text>
+                                <button onClick={() => setSeats(5)}>
+                                    <Box h="auto" marginTop="8px" cursor='pointer' >
+                                        <MdAirlineSeatReclineNormal style={{ height: "30px", width: "40px", margin: "auto" }} />
+                                        <Text fontWeight="600" fontSize='13.5px' as="b">5 Seater</Text>
 
-                                </Box>
+                                    </Box>
+                                </button>
+
+
 
 
 
@@ -298,11 +341,14 @@ const Filter = () => {
 
 
                             <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center"  >
-                                <Box h="auto" marginTop="8px" cursor='pointer' >
-                                    <MdAirlineSeatReclineNormal style={{ height: "30px", width: "40px", margin: "auto" }} />
-                                    <Text fontWeight="600" fontSize='13.5px' as="b">7 Seater</Text>
+                                <button onClick={() => setSeats(7)}>
+                                    <Box h="auto" marginTop="8px" cursor='pointer' >
+                                        <MdAirlineSeatReclineNormal style={{ height: "30px", width: "40px", margin: "auto" }} />
+                                        <Text fontWeight="600" fontSize='13.5px' as="b">7 Seater</Text>
 
-                                </Box>
+                                    </Box>
+                                </button>
+
 
                             </Box>
 
@@ -321,24 +367,30 @@ const Filter = () => {
                     <Box marginTop="25px" h="auto"  >
                         <SimpleGrid gap={2} columns={{ base: 1, sm: 2, md: 3, lg: 4 }}>
                             <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center"  >
+                                <button onClick={() => setFuel("Petrol")}>
+                                    <Box h="auto" marginTop="8px" cursor='pointer' >
+                                        <FaHandHoldingWater style={{ height: "30px", width: "40px", margin: "auto" }} />
+                                        <Text fontWeight="600" fontSize='13.5px' as="b">Petrol</Text>
 
-                                <Box h="auto" marginTop="8px" cursor='pointer' >
-                                    <FaHandHoldingWater style={{ height: "30px", width: "40px", margin: "auto" }} />
-                                    <Text fontWeight="600" fontSize='13.5px' as="b">Pertrol</Text>
+                                    </Box>
 
-                                </Box>
+
+                                </button>
 
 
 
                             </Box>
 
                             <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center"  >
+                                <button onClick={() => setFuel("Diesel")}>
+                                    <Box h="auto" marginTop="8px" cursor='pointer' >
+                                        <FaHandHoldingWater style={{ height: "30px", width: "40px", margin: "auto" }} />
+                                        <Text fontWeight="600" fontSize='13.5px' as="b">Diesel</Text>
 
-                                <Box h="auto" marginTop="8px" cursor='pointer' >
-                                    <FaHandHoldingWater style={{ height: "30px", width: "40px", margin: "auto" }} />
-                                    <Text fontWeight="600" fontSize='13.5px' as="b">Diesel</Text>
+                                    </Box>
 
-                                </Box>
+
+                                </button>
 
 
 
@@ -346,19 +398,27 @@ const Filter = () => {
 
 
                             <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center"  >
-                                <Box h="auto" marginTop="8px" cursor='pointer' >
-                                    <FaHandHoldingWater style={{ height: "30px", width: "40px", margin: "auto" }} />
-                                    <Text fontWeight="600" fontSize='13.5px' as="b">CNG</Text>
+                                <button onClick={() => setFuel("CNG")}>
+                                    <Box h="auto" marginTop="8px" cursor='pointer' >
+                                        <FaHandHoldingWater style={{ height: "30px", width: "40px", margin: "auto" }} />
+                                        <Text fontWeight="600" fontSize='13.5px' as="b">CNG</Text>
 
-                                </Box>
+                                    </Box>
+
+                                </button>
+
 
                             </Box>
                             <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center"  >
-                                <Box h="auto" marginTop="8px" cursor='pointer' >
-                                    <FaHandHoldingWater style={{ height: "30px", width: "40px", margin: "auto" }} />
-                                    <Text fontWeight="600" fontSize='13.5px' as="b">Electric</Text>
+                                <button onClick={() => setFuel("Electric")}>
+                                    <Box h="auto" marginTop="8px" cursor='pointer' >
+                                        <FaHandHoldingWater style={{ height: "30px", width: "40px", margin: "auto" }} />
+                                        <Text fontWeight="600" fontSize='13.5px' as="b">Electric</Text>
 
-                                </Box>
+                                    </Box>
+
+                                </button>
+
 
                             </Box>
 
@@ -377,12 +437,15 @@ const Filter = () => {
                     <Box marginTop="25px" h="auto"  >
                         <SimpleGrid gap={2} columns={{ base: 1, sm: 2, md: 2, lg: 2 }}>
                             <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center"  >
+                                <button onClick={() => setTransmission("Manual")}>
+                                    <Box h="auto" marginTop="8px" cursor='pointer' >
+                                        <GiGearStickPattern style={{ height: "30px", width: "40px", margin: "auto" }} />
+                                        <Text fontWeight="600" fontSize='13.5px' as="b">Manual</Text>
 
-                                <Box h="auto" marginTop="8px" cursor='pointer' >
-                                    <GiGearStickPattern style={{ height: "30px", width: "40px", margin: "auto" }} />
-                                    <Text fontWeight="600" fontSize='13.5px' as="b">Manual</Text>
+                                    </Box>
 
-                                </Box>
+                                </button>
+
 
 
 
@@ -390,11 +453,15 @@ const Filter = () => {
 
                             <Box w='100%' h='20' boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" textAlign="center"  >
 
-                                <Box h="auto" marginTop="8px" cursor='pointer' >
-                                    <GiGearStickPattern style={{ height: "30px", width: "40px", margin: "auto" }} />
-                                    <Text fontWeight="600" fontSize='13.5px' as="b">Automatic</Text>
+                                <button onClick={() => setTransmission("Automatic")}>
+                                    <Box h="auto" marginTop="8px" cursor='pointer' >
+                                        <GiGearStickPattern style={{ height: "30px", width: "40px", margin: "auto" }} />
+                                        <Text fontWeight="600" fontSize='13.5px' as="b">Automatic</Text>
 
-                                </Box>
+                                    </Box>
+                                </button>
+
+
 
 
 
