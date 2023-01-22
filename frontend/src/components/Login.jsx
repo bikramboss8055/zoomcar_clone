@@ -8,13 +8,24 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { authlogin } from "../redux/Auth/Auth.action";
 
 function Login() {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const [formData, setFormData] = useState({
+        email: "",
+        password: "",
+    });
+
+    // const 
+
+    //https://taupe-dhole-boot.cyclic.app/
+  
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -23,17 +34,8 @@ function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    // send a POST request to your server for verification
-    // axios.post("", formData)
-    //   .then(response => {
-    //     console.log(response.data);
-    //     // handle successful login
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //     // handle error
-    //   });
+    dispatch(authlogin(formData))
+    
   };
 
   return (
@@ -69,10 +71,10 @@ function Login() {
                 onChange={handleChange}
               />
             </FormControl>
-            <Button mt={4} variantColor="teal" type="submit">
+            <Button mt={4} variantColor="teal" type="submit" >
               Login
             </Button>
-            <Text>Not a User ? SignUp</Text>
+            <Text onClick={()=> navigate('/signup')}>Not a User ? SignUp</Text>
           </Stack>
         </form>
       </Box>
