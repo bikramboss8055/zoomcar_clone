@@ -125,6 +125,7 @@ authRouter.post(
           isSeller: isAuth.isSeller,
           isAdmin: isAuth.isAdmin,
           isUser: isAuth.isUser,
+          name:isAuth.first_name+' '+isAuth.last_name
         });
       } else {
         res.status(400).send({ msg: "Sorry! Fill the right credentials!" });
