@@ -1,10 +1,31 @@
 import React, { useState } from "react";
 import "../CSS/MyAccount.css";
-import { NotAllowedIcon, CheckCircleIcon, StarIcon } from "@chakra-ui/icons";
+import {
+  NotAllowedIcon,
+  CheckCircleIcon,
+  StarIcon,
+  AddIcon,
+} from "@chakra-ui/icons";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverArrow,
+  PopoverCloseButton,
+  Button,
+  Input,
+} from "@chakra-ui/react";
 import { useEffect } from "react";
 
 const MyAccount = () => {
   const [users, setUsers] = useState("");
+  const [wallet, setWallet] = useState("");
+
+  const handleChange = () => {
+    console.log(wallet);
+  };
+
   useEffect(() => {
     //   fetch("https://taupe-dhole-boot.cyclic.app/authentication/get/allUser")
     //     .then((res) => res.json())
@@ -39,7 +60,24 @@ const MyAccount = () => {
           </div>
           <div className="profile2">
             <h3>
-              <StarIcon style={{ color: "goldenrod" }} /> Credits
+              <StarIcon style={{ color: "goldenrod" }} /> Credits{" "}
+              <Popover>
+                <PopoverTrigger>
+                  <Button>
+                    <AddIcon />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent>
+                  <PopoverArrow />
+                  <PopoverCloseButton />
+                  <PopoverHeader>Enter Wallet Money</PopoverHeader>
+                  <Input
+                    onChange={(e) => setWallet(e.target.value)}
+                    placeholder="Ammount"
+                  ></Input>
+                  <Button onClick={handleChange}>Add</Button>
+                </PopoverContent>
+              </Popover>
             </h3>
             <h3>My Bookings</h3>
             <h3>My Account</h3>
