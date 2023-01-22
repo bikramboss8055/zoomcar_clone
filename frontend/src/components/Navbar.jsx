@@ -9,17 +9,29 @@ import {
   Flex,
   HStack,
   Image,
+  Text,
   useDisclosure,
 } from "@chakra-ui/react";
 import { CgMenuBoxed } from "react-icons/cg";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { IoCallOutline, IoLocationOutline } from "react-icons/io5";
 import { FaUserAlt } from "react-icons/fa";
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { MdLogout } from "react-icons/md";
+import { auth_login, auth_logout } from "../redux/Auth/Auth.actionType";
 
 function Navbar() {
+
     const navigate = useNavigate()
+
+    const handleHome = ()=>{
+      navigate('/')
+    } 
+
+    
+
 
   return (
     <div>
@@ -29,8 +41,9 @@ function Navbar() {
             <Box>
               <Hamburg />
             </Box>
-            <Box>
+            <Box >
               <Image
+              onClick={handleHome}
                 src="https://i.ibb.co/6m3XQ8d/Quick-cars-Logoaaaa.png"
                 h={"80px"}
                 w={"180px"}
@@ -77,6 +90,30 @@ function Navbar() {
 
 function Hamburg() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isAuth } = useSelector((state) => state.auth.isAuth);
+  const dispatch = useDispatch();
+
+
+  
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      dispatch({ type: auth_login, payload: { token: token } });
+    }
+  }, [isAuth]);
+
+
+  const navigate = useNavigate()
+  const handleLoginB = ()=>{
+    navigate('/login')
+  } 
+
+
+
+  const handleLogout = ()=>{
+    localStorage.removeItem("authToken");
+    dispatch(auth_logout());
+  }
 
   return (
     <>
@@ -90,9 +127,9 @@ function Hamburg() {
         <DrawerContent>
           <DrawerHeader borderBottomWidth="1px" bg="rgb(229, 232, 236)">
             <Box color={"Black"}>
-              <Flex gap="7px" alignItems={"center"}>
+              <Flex gap="7px" alignItems={"center"} onClick={handleLoginB}>
                 <FaUserAlt />
-                Login/Register
+                  {isAuth ? ("UserName") : ("Login or Signup")}
               </Flex>
             </Box>
           </DrawerHeader>
@@ -148,6 +185,33 @@ function Hamburg() {
                   Help & Support
                 </Box>
               </Flex>
+              {isAuth ? (
+                <Flex mt={"10px"} mb={"10px"}>
+                <MdLogout
+                  style={{
+                    marginRight: "10px",
+                    marginTop: "5px",
+                    fontSize: "25px",
+                  }}
+                />
+                <Box mt={"5px"} ml={"15px"} onClick={handleLogout}>
+                  LogOut
+                </Box>
+              </Flex>
+              ) : (
+                <Flex mt={"10px"} mb={"10px"}>
+                <MdLogout
+                  style={{
+                    marginRight: "10px",
+                    marginTop: "5px",
+                    fontSize: "25px",
+                  }}
+                />
+                <Box mt={"5px"} ml={"15px"}>
+                  LogIn
+                </Box>
+              </Flex>
+              )}
             </Box>
           </DrawerBody>
         </DrawerContent>

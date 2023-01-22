@@ -22,7 +22,7 @@ const HomePage = () => {
                     </Flex>
                 </Center>
 
-                <Center h={"auto"} w={[360, 500, 500, 500, 500]} p={30} style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%)" }}>
+                {/* <Center h={"auto"} w={[360, 500, 500, 500, 500]} p={30} style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%)" }}>
                     <Tabs isFitted variant='enclosed' w={[360, 500, 500, 500]}>
                         <Center>
                             <TabList h={12} bg={"white"} mb='0.3em' w={[330, 470, 470, 470, 470]}>
@@ -52,7 +52,7 @@ const HomePage = () => {
                             </TabPanel>
                         </TabPanels>
                     </Tabs>
-                </Center>
+                </Center> */}
             </Box>
 
             <Center style={{ height: "140px", }}>
@@ -158,7 +158,7 @@ const HomePage = () => {
             </Box>
 
 
-            <Footer />
+            {/* <Footer /> */}
 
 
         </Box>

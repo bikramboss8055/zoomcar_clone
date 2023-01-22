@@ -35,7 +35,6 @@ function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(authlogin(formData))
-    
   };
 
   return (
