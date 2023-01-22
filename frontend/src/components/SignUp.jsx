@@ -28,7 +28,7 @@ function SignUp() {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
-    console.log(value)
+    // console.log(value)
   };
 
   const handleSubmit = (event) => {
@@ -36,7 +36,7 @@ function SignUp() {
     // handle form submission here
     dispatch(authSignup(formData))
 
-   navigate('/login')
+   
    
     
 
