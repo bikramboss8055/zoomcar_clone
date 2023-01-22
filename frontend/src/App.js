@@ -1,5 +1,8 @@
 import { Text } from "@chakra-ui/react";
 import "./App.css";
+import Admin from "./pages/Admin";
+// import HomePage from "./pages/HomePage";
+import MyAccount from "./pages/MyAccount";
 
 import DatePicker from "./components/DatePicker";
 import Navbar from "./components/Navbar";
@@ -17,6 +20,8 @@ import CheckoutPage from "./components/CheckoutPage";
 function App() {
   return (
     <div>
+
+
     
     <Navbar/>
     <AllRoutes/>
@@ -29,6 +34,7 @@ function App() {
     {/* <HomePage/> */}
     {/* <Checkout/> */}
     {/* <CheckoutPage/> */}
+
 
 
 

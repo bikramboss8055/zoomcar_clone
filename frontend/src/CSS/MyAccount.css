@@ -1,0 +1,86 @@
+.motherBox {
+  width: 95%;
+  display: flex;
+  margin: auto;
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.child1 {
+  border: 1px solid #e1e1e1;
+  width: 20%;
+  height: 40rem;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.child2 {
+  border: 1px solid #e1e1e1;
+  width: 80%;
+  height: 40rem;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 50%;
+  margin: auto;
+}
+
+.userD {
+  margin: auto;
+  text-align: center;
+  width: 90%;
+  border-bottom: 1px solid #b7b6b6;
+}
+
+.profile {
+  border-bottom: 1px solid #ababab;
+  margin-left: 12px;
+  width: 90%;
+}
+
+.profile2 {
+  gap: 10px;
+  display: grid;
+}
+
+.profile2 > h3 {
+  border-bottom: 1px solid;
+  width: 90%;
+  margin: auto;
+}
+
+.card1 {
+  width: 95%;
+  margin: auto;
+  display: grid;
+  gap: 20px;
+}
+
+.card2 {
+  width: 95%;
+  margin: auto;
+  display: grid;
+  gap: 20px;
+}
+
+.update {
+  width: 100px;
+  border: 1px solid;
+  margin: auto;
+  text-align: center;
+}
+
+@media screen and (max-width: 680px) {
+  .motherBox {
+    display: grid;
+  }
+  .child1 {
+    width: 100%;
+  }
+  .child2 {
+    width: 100%;
+  }
+}
