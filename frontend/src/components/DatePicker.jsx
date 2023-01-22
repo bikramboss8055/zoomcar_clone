@@ -24,6 +24,8 @@ function DatePicker() {
       key: "selection",
     },
   ]);
+  console.log(state[0].startDate);
+  console.log(state[0].endDate);
   return (
     <div>
       <Box align="center" mt="40px">
@@ -67,7 +69,6 @@ function DatePicker() {
 function SliderThumbWithTooltip() {
   const [sliderValue, setSliderValue] = React.useState(10);
   const [showTooltip, setShowTooltip] = React.useState(false);
-  console.log(sliderValue);
   return (
     <Slider
       w="500px"
