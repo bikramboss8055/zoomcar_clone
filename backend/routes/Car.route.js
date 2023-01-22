@@ -263,14 +263,7 @@ carRouter.get("/allcars", async (req, res) => {
           sortKm.cartype = cartype;
         }
         
-        let allcars= await CarModel.find(sortKm).limit(limit).skip(limit*(page-1)).sort(sortcondition);
-        res.send(allcars)
-    } catch (error) {
-        res
-        .status(500)
-        .send({ msg: "Somthing Went Wrong In getting cars", error });
-
-    }
+   
     if(location){
       sortKm.location = location;
     }
