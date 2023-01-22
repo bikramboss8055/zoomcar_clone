@@ -230,21 +230,7 @@ carRouter.get("/allcars", async (req, res) => {
     }
 
 
-        let {page=1,price,km,rating, seat, transmission, fueltype,cartype}= req.query;
-
-        let limit= 10;
-        let sortcondition = {};
-        if(price == "asc"){
-          sortcondition.price = 1;
-        }else if(price == "desc"){
-          sortcondition.price = -1;
-        }
-
-        if(rating == "asc"){
-          sortcondition.rating = 1;
-        }else if(rating == "desc"){
-          sortcondition.rating = -1;
-        }
+       
 
         let sortKm = {};
         if(km){
