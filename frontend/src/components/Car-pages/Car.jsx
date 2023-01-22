@@ -1,13 +1,13 @@
 import { Box, Flex, Text, Button, GridItem, Grid, SimpleGrid, Input, InputGroup, InputRightElement, IconButton, RangeSlider, RangeSliderTrack, RangeSliderFilledTrack, RangeSliderThumb, Image, Avatar } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { BiCar, BiRupee } from "react-icons/bi"
-import { AiOutlineArrowUp, AiOutlineArrowDown, AiOutlineStar } from "react-icons/ai"
+import { AiOutlineArrowUp, AiOutlineArrowDown, AiOutlineStar,AiOutlineArrowRight } from "react-icons/ai"
 import { IoLocationOutline, IoCarSportSharp, IoCarSport, IoCarSportOutline } from "react-icons/io5"
-import { GrCar } from "react-icons/gr"
+import { HiOutlineArrowRight } from "react-icons/hi2"
 import { GiPathDistance, GiGearStickPattern } from "react-icons/gi"
 import { FaBullhorn, FaCarSide, FaHandHoldingWater, FaRegStar } from "react-icons/fa"
 import { MdAirlineSeatReclineNormal } from "react-icons/md"
-import { FcRating } from "react-icons/fc"
+import { FcRating, FcApproval } from "react-icons/fc"
 import { BsArrowRightCircle } from "react-icons/bs"
 
 
@@ -15,23 +15,46 @@ import "./Car.css"
 import { ArrowRightIcon, PhoneIcon, Search2Icon, SearchIcon } from '@chakra-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCars } from '../../redux/Car/action'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { Loading } from './Loading'
 import Filter from './Filter'
 
 const Car = () => {
-
+    const [searchParams, setSearchParams] = useSearchParams()
+    const location = useLocation()
     const dispatch = useDispatch();
     const cars = useSelector(store => store.cars)
-    //const store=useSelector(store=>console.log(store))
     const isLoading = useSelector(store => store.isLoading)
     const isError = useSelector(store => store.isError)
     console.log(cars, "carsss")
+    console.log(location)
 
     // Fetching Data
     useEffect(() => {
-        dispatch(getCars)
-    }, [])
+
+        if (location || cars.length === 0) {
+            const sortBy = searchParams.get('price')
+
+            const getCarsParams = {
+                params: {
+                    fueltype: searchParams.get("fuel"),
+                    cartype: searchParams.get("cartype"),
+                    seat: searchParams.get("seat"),
+                    transmission: searchParams.get("transmission"),
+                    rating: searchParams.get("ratings"),
+                    price: sortBy
+
+                },
+            }
+
+            dispatch(getCars(getCarsParams))
+
+        }
+
+
+
+
+    }, [cars.length, dispatch, location.search])
 
     if (isError) {
 
@@ -46,8 +69,8 @@ const Car = () => {
         return (
             <div className="mainDiv">
                 <Flex h="100%" w="100%" justifyContent="space-between" >
-                    <Box className="mainfilterBox" w="30%">
-                      <Filter/>
+                    <Box w="30%">
+                        <Filter />
 
                     </Box>
 
@@ -55,13 +78,57 @@ const Car = () => {
 
 
                     <Box w="68%">
-                        <Box className='searchBar' h="100px" border="1px solid green">
+                        <Box className='searchBar' h="auto" >
+                            <SimpleGrid columns={{ base: 1, sm: 1, md: 1, lg: 2 }} spacing={6}>
+                                <Box h="60px" border="1px solid green" borderRadius="12px" boxShadow= "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px">
+                                    <Box display="flex" w="50%" h="100%" >
+                                        <Box  w="30%" h="100%" >
+                                            <FcApproval style={{ width: "50px", height: "30px", margin: "auto", marginTop: "10px" }} />
+                                        </Box>
+                                        <Box  w="auto" h="100%"  >
+                                            <Box marginTop="12px">
+                                                <Text fontSize="lg" as="b" marginTop="30px">Delhi NCR</Text>
+                                            </Box>
+
+                                        </Box>
+                                    </Box>
+                                </Box>
+                                <Box h="60px" border="1px solid green" borderRadius="12px" boxShadow= "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px">
+                                    <Box display="flex" h="100%">
+                                        <Box h="100%" w="33%">
+                                            <Box marginTop="5px" marginLeft="15px">
+                                                <Text noOfLines={1} fontSize="13px" fontWeight="500" color="#A8A8A8" fontFamily="Inter, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, Sans-Serif">START DATE/TIME</Text>
+                                            </Box>
+                                            <Box marginLeft="15px">
+                                                <Text noOfLines={1} fontSize="sm" as="b"  fontFamily="Inter, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, Sans-Serif">23 Jan, 2023 08:00 AM</Text>
+                                            </Box>
+
+
+
+                                        </Box>
+                                        <Box  w="33%" h="100%">
+                                            <HiOutlineArrowRight style={{ width: "50px", height: "30px", margin: "auto", marginTop: "10px" }}/>
+                                        </Box>
+                                        <Box  h="100%" w="33%">
+                                            <Box marginTop="5px">
+                                                <Text noOfLines={1} fontSize="13px" fontWeight="500" color="#A8A8A8" fontFamily="Inter, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, Sans-Serif">END DATE/TIME</Text>
+                                            </Box>
+                                            <Box>
+                                                <Text noOfLines={1} fontSize="sm" as="b"  fontFamily="Inter, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, Sans-Serif">25 Jan, 2023 08:00 AM</Text>
+                                            </Box>
+
+
+
+                                        </Box>
+                                    </Box>
+                                </Box>
+                            </SimpleGrid>
 
 
                         </Box>
 
 
-                        <Box className='carBox' >
+                        <Box className='carBox' marginTop="20px">
                             <SimpleGrid columns={{ base: 1, sm: 1, md: 1, lg: 2 }} spacing={6}>
                                 {cars.length > 0 && cars.map((item) => {
                                     return (
@@ -147,7 +214,7 @@ const Car = () => {
 
                             </SimpleGrid>
                             {/* <SimpleGrid columns={2} spacing={6}>
-                                <Box border="1px solid red" height='400px'>
+                                <Box  height='400px'>
                                     <Box className='imagBox' h="60%" border="1px solid black">
                                         <Image w="100% " h="100%" src="https://zoomcar-assets.zoomcar.com/photographs/original/13284dce101cd7020c977103e2cb5f33bee3b0e9.png?1663874479" />
     

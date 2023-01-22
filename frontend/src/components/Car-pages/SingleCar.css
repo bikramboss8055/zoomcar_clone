@@ -1,10 +1,10 @@
 .mainDiv{
-    border:1px solid red;
+    border:1px solid white;
     height:auto
 }
 
 .mainfilterBox{
-    border:1px solid red;
+    /* border:1px solid red; */
     width:88%;
     height:auto;
 

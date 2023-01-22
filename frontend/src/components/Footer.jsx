@@ -24,7 +24,7 @@ const ListHeader = ({ children }) => {
 
 const Footer = () => {
     return (
-        <Box bg="#666666" color="white">
+        <Box bg="#666666" color="white" marginTop="60px">
             <Container as={Stack} maxW={'90%'} py={10}>
                 <Heading size="md" color="white">We operate in many other cities</Heading>
                 <Heading pt={4} size="lg" color="white">INDIA</Heading>

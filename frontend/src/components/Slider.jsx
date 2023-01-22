@@ -87,7 +87,7 @@ const Slider = () => {
             <Box key={i} w={[250, 250, 250, 250, 290]} margin="auto" spacing={"auto"} mt={5}  >
               <Box bg="white" borderRadius={8}>
                 <Center height={"100%"} >
-                  <Link>
+                  <Link to="/car">
                     <Image
                       src={e.image}
                       alt="Green double couch with wooden legs"
