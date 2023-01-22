@@ -56,17 +56,6 @@ function getCars(params){
 
 }
 
-// const getCarsbyId=(car_id)=(dispatch)=>{
-//     dispatch(getCarRequest())
-//     axios.get(`http://localhost:8080/cars/${car_id}`)
-//     .then((r)=>{
-//         dispatch(getCarSuccess(r.data))
-//         console.log(r.data)
-//     })
-//     .catch((e)=>{
-//         dispatch(getCarError());
-//     });
-// }
 
 
 export {getCarError,getCarRequest,getCarSuccess,getCars }
