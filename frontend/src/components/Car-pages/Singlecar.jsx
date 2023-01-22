@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Flex, Text, Button, GridItem, Grid, SimpleGrid, Input, InputGroup, InputRightElement, IconButton, RangeSlider, RangeSliderTrack, RangeSliderFilledTrack, RangeSliderThumb, Image, Avatar, AspectRatio, Radio } from '@chakra-ui/react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import "./SingleCar.css"
 
 import { FcApproval, FcHighPriority, FcBusinessman } from 'react-icons/fc'
@@ -382,7 +382,7 @@ const Singlecar = () => {
                             </Box>
 
                             <Box w="100%"  marginTop="20px" justifySelf="center">
-                               
+                               <Link to={`/datepicker/${car_id}`}>
                                 <Button
                                     marginLeft="20px"
                                     size='md'
@@ -395,6 +395,7 @@ const Singlecar = () => {
                                 >
                                     PROCEED TO PAY ₹ {data.price}
                                 </Button>
+                                </Link>
 
                                 
                                

@@ -47,7 +47,6 @@ function getCars(params){
         .get("https://taupe-dhole-boot.cyclic.app/cars/allcars",params)
         .then((r)=>{
             dispatch(getCarSuccess(r.data));
-            console.log(r.data,"hiii")
         })
         .catch((e)=>{
             dispatch(getCarError())

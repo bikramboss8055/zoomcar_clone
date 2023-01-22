@@ -22,17 +22,17 @@ const AllRoutes = () => {
         <Route
           path="/car/:car_id"
           element={
-           
+            <PrivateRoute>
               <Singlecar />
-           
+             </PrivateRoute>
           }
         ></Route>
         <Route
-          path="/datepicker"
+          path="/datepicker/:car_id"
           element={
-            // <PrivateRoute>
+            <PrivateRoute>
               <DatePicker />
-            // </PrivateRoute>
+             </PrivateRoute>
           }
         ></Route>
         <Route
@@ -40,7 +40,7 @@ const AllRoutes = () => {
           element={
             <PrivateRoute>
               <CheckoutPage />
-            </PrivateRoute>
+             </PrivateRoute>
           }
         ></Route>
         <Route path="/myaccount" element={<MyAccount />}></Route>

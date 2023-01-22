@@ -16,8 +16,10 @@ import React, { useState } from "react";
 import { DateRange, DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
+import { Link, useParams } from "react-router-dom";
 
 function DatePicker() {
+  const { car_id } = useParams()
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -52,7 +54,7 @@ function DatePicker() {
             months={2}
             ranges={state}
             direction="horizontal"
-            className="date-range"
+            
           />
         </Box>
         <Box align="center" w="750px" mt="40px">
@@ -66,9 +68,11 @@ function DatePicker() {
           </Flex>
         </Box>
         <Box>
-          <Button size="lg" color="white" bg="green" w="500px">
+          <Link to={`/checkout/${car_id}`}>
+          <Button  size="lg" color="white" bg="green" w="500px">
             Continue
           </Button>
+          </Link>
         </Box>
       </Box>
     </div>

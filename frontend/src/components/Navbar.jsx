@@ -26,6 +26,7 @@ import { auth_login, auth_logout } from "../redux/Auth/Auth.actionType";
 
 function Navbar() {
   const navigate = useNavigate();
+  
 
   const handleHome = () => {
     navigate("/");
@@ -98,15 +99,10 @@ function Navbar() {
 
 function Hamburg() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isAuth } = useSelector((state) => state.auth.isAuth);
+  const { isAuth,name } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      dispatch({ type: auth_login, payload: { token: token } });
-    }
-  }, [isAuth]);
+  
 
   const navigate = useNavigate();
   const handleLoginB = () => {
@@ -114,8 +110,7 @@ function Hamburg() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    dispatch(auth_logout());
+    dispatch({type: auth_logout})
   };
 
   return (
@@ -132,7 +127,7 @@ function Hamburg() {
             <Box color={"Black"}>
               <Flex gap="7px" alignItems={"center"} onClick={handleLoginB}>
                 <FaUserAlt />
-                {isAuth ? "UserName" : "Login or Signup"}
+                {isAuth ? name : "Login or Signup"}
               </Flex>
             </Box>
           </DrawerHeader>
