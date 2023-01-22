@@ -36,7 +36,7 @@ const Singlecar = () => {
         }
 
     };
-
+    
     useEffect(() => {
         getData(`https://taupe-dhole-boot.cyclic.app/cars/getcar/${car_id}`)
 
