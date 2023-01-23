@@ -27,13 +27,20 @@ function DatePicker() {
       key: "selection",
     },
   ]);
+  console.log(state[0].startDate, state[0].endDate)
 
   const handleSelect = (item) => {
     const daysSelected = (
       item.selection.endDate - item.selection.startDate
     ) / (1000 * 60 * 60 * 24);
-    console.log("Number of days selected: ", daysSelected+1);
+    // console.log("Number of days selected: ", daysSelected+1);
     setState([item.selection]);
+     const No_of_days = {}
+     No_of_days.startDate = new Date(state[0].startDate).toString()
+     No_of_days.endDate = new Date(state[0].endDate).toString()
+     No_of_days.days=daysSelected+1
+      localStorage.setItem('Days',JSON.stringify(No_of_days))
+      
   };
 
   

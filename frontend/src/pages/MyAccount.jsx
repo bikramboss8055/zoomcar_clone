@@ -17,8 +17,10 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const MyAccount = () => {
+  const { name } = useSelector((state) => state.auth);
   const [users, setUsers] = useState("");
   const [wallet, setWallet] = useState("");
 
@@ -46,7 +48,7 @@ const MyAccount = () => {
             />
           </div>
           <div className="userD">
-            <h2>Name</h2>
+            <h2>{name}</h2>
             <h3>Phone Number</h3>
             <h3>Email</h3>
           </div>
@@ -136,7 +138,7 @@ const MyAccount = () => {
             </div>
             <div style={{ display: "flex", gap: "100px" }}>
               <p>Name</p>
-              <p>Name Something</p>
+              <p>{name}</p>
             </div>
             <div style={{ display: "flex", gap: "100px" }}>
               <p>Gender</p>

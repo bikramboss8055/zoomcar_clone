@@ -5,6 +5,7 @@ import {
   Stack,
   Button,
   Box,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
@@ -15,6 +16,7 @@ import { authSignup } from "../redux/Auth/Auth.action";
 function SignUp() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const toast = useToast()
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -35,6 +37,12 @@ function SignUp() {
     event.preventDefault();
     // handle form submission here
     dispatch(authSignup(formData))
+    toast({
+      title: 'Account Created',
+      position: 'top',
+      status:'success',
+      isClosable: true,
+    })
 
     navigate('/login')
 

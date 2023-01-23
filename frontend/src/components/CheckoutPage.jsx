@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Divider,
   Flex,
   Image,
@@ -10,6 +11,7 @@ import {
   TabPanels,
   Tabs,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import {
@@ -18,33 +20,33 @@ import {
   FaRegStopCircle,
   FaStopCircle,
 } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 function CheckoutPage() {
-  const { car_id } = useParams()
-  const [data, setData] = useState({})
+  const { car_id } = useParams();
+  const toast = useToast();
+  const navigate = useNavigate();
+  const [data, setData] = useState({});
+  const [arpit, setArpit] = useState({});
 
-    const getData = async (url) => {
+  const getData = async (url) => {
+    try {
+      let res = await fetch(url);
+      let carData = await res.json();
+      //console.log(carData)
+      setData(carData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-        try {
-            let res = await fetch(url)
-            let carData = await res.json()
-            //console.log(carData)
-            setData(carData)
+  useEffect(() => {
+    getData(`https://taupe-dhole-boot.cyclic.app/cars/getcar/${car_id}`);
+    const days = JSON.parse(localStorage.getItem("Days"));
+    setArpit(days);
+  }, [car_id]);
 
-        } catch (err) {
-            console.log(err)
-
-        }
-
-    };
-
-    useEffect(() => {
-        getData(`https://taupe-dhole-boot.cyclic.app/cars/getcar/${car_id}`)
-
-    }, [car_id])
-
-    console.log(data)
+  console.log(data);
   return (
     <div>
       <Flex mx="100px" mt="30px" justifyContent={"space-between"} gap="10px">
@@ -208,7 +210,7 @@ function CheckoutPage() {
                           letterSpacing="0.4px"
                           color="#a8a8a8"
                         >
-                          Amount:
+                          Amount: {Number(data.price) * Number(arpit.days)}
                         </Text>
                       </Box>
                       <Flex
@@ -306,7 +308,7 @@ function CheckoutPage() {
                       letterSpacing="0.4px"
                       color="#a8a8a8"
                     >
-                      Amount:
+                      Amount: {Number(data.price) * Number(arpit.days)}
                     </Text>
                   </Box>
                   <Input
@@ -349,7 +351,7 @@ function CheckoutPage() {
                         letterSpacing="0.4px"
                         color="#a8a8a8"
                       >
-                        Amount:
+                        Amount: {Number(data.price) * Number(arpit.days)}
                       </Text>
                     </Box>
                     <Box
@@ -385,7 +387,7 @@ function CheckoutPage() {
                           letterSpacing="0.4px"
                           color="#a8a8a8"
                         >
-                          Amount:
+                          Amount: {Number(data.price) * Number(arpit.days)}
                         </Text>
                       </Box>
                       <Flex px="10px" py="10px" alignItems="start" gap="10px">
@@ -606,7 +608,7 @@ function CheckoutPage() {
                   letterSpacing="0.16px"
                   color={"#1f1f1f"}
                 >
-                 {data.title}
+                  {data.title}
                 </Text>
                 <Flex mt={"7px"} gap="30px">
                   <Flex gap={"5px"}>
@@ -621,7 +623,7 @@ function CheckoutPage() {
                       letterSpacing="0.4px"
                       color={"#666"}
                     >
-                     {data.transmission}
+                      {data.transmission}
                     </Text>
                   </Flex>
                   <Flex>
@@ -641,19 +643,16 @@ function CheckoutPage() {
                   </Flex>
                 </Flex>
               </Box>
-              <Image
-                maxHeight={"100px"}
-                src={data.image}
-              />
+              <Image maxHeight={"100px"} src={data.image} />
             </Flex>
             <Box p="18px">
               <Flex my="10px" gap="20px" alignItems={"center"}>
                 <FaRegDotCircle fontSize="16px" color="green" />
-                <Text> Sun, 22JAN</Text>
+                <Text> {arpit.startDate}</Text>
               </Flex>
               <Flex my="10px" gap="20px" alignItems={"center"}>
                 <FaRegStopCircle color="red" />
-                <Text> Sun, 22JAN</Text>
+                <Text> {arpit.endDate}</Text>
               </Flex>
             </Box>
             <Box
@@ -679,8 +678,22 @@ function CheckoutPage() {
               letterSpacing="0.24px"
               color="#1f1f1f"
             >
-              Final fare :
+              Final fare :  {data.price}/day * {arpit.days}days ={Number(data.price) * Number(arpit.days)} INR
             </Text>
+            <Button
+              onClick={() =>
+                toast({
+                  title: "Booking Successful",
+                  status: "success",
+                  isClosable: true,
+                  position: "top",
+                })
+              }
+              w="full"
+              colorScheme={"whatsapp"}
+            >
+              Pay {Number(data.price) * Number(arpit.days)} INR
+            </Button>
           </Box>
         </Box>
       </Flex>
