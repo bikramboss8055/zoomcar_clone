@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import { CgMenuBoxed } from "react-icons/cg";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { IoCallOutline, IoLocationOutline } from "react-icons/io5";
-import { FaUserAlt } from "react-icons/fa";
+import { FaUserAlt, FaUserCog } from "react-icons/fa";
 import React, { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,8 +25,8 @@ import { MdLogout } from "react-icons/md";
 import { auth_login, auth_logout } from "../redux/Auth/Auth.actionType";
 
 function Navbar() {
+  const { isAuth,name } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  
 
   const handleHome = () => {
     navigate("/");
@@ -41,21 +41,14 @@ function Navbar() {
               <Hamburg />
             </Box>
 
-
-           
-
-
             <Box cursor="pointer">
               <Image
-              
-              onClick={handleHome}
-
+                onClick={handleHome}
                 src="https://i.ibb.co/6m3XQ8d/Quick-cars-Logoaaaa.png"
                 h={"80px"}
                 w={"180px"}
               />
             </Box>
-
           </HStack>
           <Flex
             w={400}
@@ -75,19 +68,27 @@ function Navbar() {
                 </Button>
               </Box>
               <Box>
-                <Button
-                  color="white"
-                  variant="ghost"
-                  css={{
-                    "&:hover": {
-                      backgroundColor: "transparent",
-                    },
-                  }}
-                  fontSize="20px"
-                  onClick={() => navigate("/login")}
-                >
-                  Login/SignUp
-                </Button>
+                {isAuth ? (
+                  <>
+                  <Text fontSize={'24px'} color={'white'}>{name}</Text>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      color="white"
+                      variant="ghost"
+                      css={{
+                        "&:hover": {
+                          backgroundColor: "transparent",
+                        },
+                      }}
+                      fontSize="20px"
+                      onClick={() => navigate("/login")}
+                    >
+                      Login/SignUp
+                    </Button>
+                  </>
+                )}
               </Box>
             </Hide>
           </Flex>
@@ -99,10 +100,8 @@ function Navbar() {
 
 function Hamburg() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isAuth,name } = useSelector((state) => state.auth);
+  const { isAuth, name } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-
-  
 
   const navigate = useNavigate();
   const handleLoginB = () => {
@@ -110,7 +109,7 @@ function Hamburg() {
   };
 
   const handleLogout = () => {
-    dispatch({type: auth_logout})
+    dispatch({ type: auth_logout });
   };
 
   return (
@@ -184,18 +183,35 @@ function Hamburg() {
                 </Box>
               </Flex>
               {isAuth ? (
-                <Flex mt={"10px"} mb={"10px"}>
-                  <MdLogout
-                    style={{
-                      marginRight: "10px",
-                      marginTop: "5px",
-                      fontSize: "25px",
-                    }}
-                  />
-                  <Box mt={"5px"} ml={"15px"} onClick={handleLogout}>
-                    LogOut
-                  </Box>
-                </Flex>
+                <>
+                  <Link to="/myaccount">
+                    <Flex>
+                      <FaUserCog
+                        style={{
+                          marginRight: "10px",
+                          marginTop: "5px",
+                          fontSize: "25px",
+                        }}
+                      />
+                      <Box mt={"5px"} ml={"15px"}>
+                        My Account
+                      </Box>
+                    </Flex>
+                  </Link>
+
+                  <Flex mt={"10px"} mb={"10px"}>
+                    <MdLogout
+                      style={{
+                        marginRight: "10px",
+                        marginTop: "5px",
+                        fontSize: "25px",
+                      }}
+                    />
+                    <Box mt={"5px"} ml={"15px"} onClick={handleLogout}>
+                      LogOut
+                    </Box>
+                  </Flex>
+                </>
               ) : (
                 <Flex mt={"10px"} mb={"10px"}>
                   <MdLogout

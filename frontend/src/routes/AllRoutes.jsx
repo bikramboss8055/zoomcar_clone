@@ -24,7 +24,7 @@ const AllRoutes = () => {
           element={
             <PrivateRoute>
               <Singlecar />
-             </PrivateRoute>
+            </PrivateRoute>
           }
         ></Route>
         <Route
@@ -32,7 +32,7 @@ const AllRoutes = () => {
           element={
             <PrivateRoute>
               <DatePicker />
-             </PrivateRoute>
+            </PrivateRoute>
           }
         ></Route>
         <Route
@@ -40,10 +40,17 @@ const AllRoutes = () => {
           element={
             <PrivateRoute>
               <CheckoutPage />
-             </PrivateRoute>
+            </PrivateRoute>
           }
         ></Route>
-        <Route path="/myaccount" element={<MyAccount />}></Route>
+        <Route
+          path="/myaccount"
+          element={
+            <PrivateRoute>
+              <MyAccount />
+            </PrivateRoute>
+          }
+        ></Route>
         <Route path="/admin" element={<Admin />}></Route>
       </Routes>
     </div>

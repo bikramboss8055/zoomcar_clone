@@ -7,6 +7,7 @@ import {
   Box,
   Image,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -19,6 +20,7 @@ import { isMsgFalse } from "../redux/Auth/Auth.actionType";
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const toast = useToast()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -28,6 +30,12 @@ function Login() {
 
   useEffect(() => {
     if (isSuccessMsg) {
+      toast({
+        title: 'Login Successful',
+        position: 'top',
+        status:'success',
+        isClosable: true,
+      })
       navigate("/");
     }
     dispatch({ type: isMsgFalse });
