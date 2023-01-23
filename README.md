@@ -98,7 +98,7 @@ Rent a car for airport pickups, grocery shopping, mall visits, upcoming weddings
 
 
 ## Members:
-* [Bikram -Team Lead](https://github.com/bikramboss8055)
+* [Bikram Dutta -Team Lead](https://github.com/bikramboss8055)
 * [Arpit Kumar Sahu](https://github.com/arpitkumarsahu)
 * [Shivang Kumar](https://github.com/kshivang80)
 * [Abhra Mondal](https://github.com/Abhra11)
