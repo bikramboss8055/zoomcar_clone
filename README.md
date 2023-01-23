@@ -7,18 +7,18 @@ Quick-car is India’s largest self-drive car rental marketplace, which offers a
 
 Rent a car for airport pickups, grocery shopping, mall visits, upcoming weddings, long-weekend getaways, hill station trips, road trips or vacation travel - you can always find a wide variety of cars on Zoom car app from local hosts - near your location - to fit your needs. We’re here to help you unlock memorable driving experiences in your travel with your friends and family.
 
-##Some snapshots of the UI
+## Some snapshots of the UI
 
-#Landing Page
+# Landing Page
 ![Screenshot (450)](https://user-images.githubusercontent.com/101388724/213978364-0ab87df2-006e-4c84-8153-a9ba2b9169c2.png)
 
-#Login Page
+# Login Page
 ![Screenshot (442)](https://user-images.githubusercontent.com/101388724/213978446-dbfbdb2d-4ee0-4823-8f77-a27051bfcc10.png)
 
-#Car Page
+# Car Page
 ![Screenshot (444)](https://user-images.githubusercontent.com/101388724/213978628-a8878d82-a726-46f4-b2b6-f6d02f65bc47.png)
 
-#Checkout Page
+# Checkout Page
 ![Screenshot (449)](https://user-images.githubusercontent.com/101388724/213978718-3a093a30-bbd5-4637-a907-fde0545ebe5b.png)
 
 
