@@ -100,7 +100,7 @@ const Car = () => {
                                                 <Text noOfLines={1} fontSize="13px" fontWeight="500" color="#A8A8A8" fontFamily="Inter, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, Sans-Serif">START DATE/TIME</Text>
                                             </Box>
                                             <Box marginLeft="15px">
-                                                <Text noOfLines={1} fontSize="sm" as="b"  fontFamily="Inter, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, Sans-Serif">23 Jan, 2023 08:00 AM</Text>
+                                                <Text noOfLines={1} fontSize="sm" as="b"  fontFamily="Inter, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, Sans-Serif"></Text>
                                             </Box>
 
 
@@ -114,7 +114,7 @@ const Car = () => {
                                                 <Text noOfLines={1} fontSize="13px" fontWeight="500" color="#A8A8A8" fontFamily="Inter, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, Sans-Serif">END DATE/TIME</Text>
                                             </Box>
                                             <Box>
-                                                <Text noOfLines={1} fontSize="sm" as="b"  fontFamily="Inter, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, Sans-Serif">25 Jan, 2023 08:00 AM</Text>
+                                                <Text noOfLines={1} fontSize="sm" as="b"  fontFamily="Inter, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, Sans-Serif"></Text>
                                             </Box>
 
 
