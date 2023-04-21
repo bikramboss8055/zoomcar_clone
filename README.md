@@ -1,4 +1,4 @@
-# loved-bedroom-6386 Quick-car.com
+#  Quick-car.com
 
 ## Objective:
 Quick-car is India’s largest self-drive car rental marketplace, which offers a wide selection of over 20,000 cars in more than 45 cities in India. Zoomcar gives you great car rental solutions and flexibility to rent a car for 8 hours, a few days, a week, month or even longer!
