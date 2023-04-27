@@ -25,7 +25,7 @@ import { MdLogout } from "react-icons/md";
 import { auth_login, auth_logout } from "../redux/Auth/Auth.actionType";
 
 function Navbar() {
-  const { isAuth,name } = useSelector((state) => state.auth);
+  const { isAuth, name } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const handleHome = () => {
@@ -70,7 +70,16 @@ function Navbar() {
               <Box>
                 {isAuth ? (
                   <>
-                  <Text fontSize={'24px'} color={'white'}>{name}</Text>
+                    <Text
+                      fontSize={"24px"}
+                      color={"white"}
+                      onClick={() => navigate("/admin")}
+                    >
+                      {name}
+                    </Text>
+                    <Text color={"white"} onClick={() => navigate("/admin")}>
+                      Go to Admin Page
+                    </Text>
                   </>
                 ) : (
                   <>
