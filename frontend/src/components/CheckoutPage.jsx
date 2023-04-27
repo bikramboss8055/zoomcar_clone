@@ -26,27 +26,37 @@ function CheckoutPage() {
   const { car_id } = useParams();
   const toast = useToast();
   const navigate = useNavigate();
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
   const [arpit, setArpit] = useState({});
 
   const getData = async (url) => {
     try {
       let res = await fetch(url);
       let carData = await res.json();
-      //console.log(carData)
+      console.log(carData);
       setData(carData);
+
+      console.log("d", data);
     } catch (err) {
-      console.log(err);
+      console.log("e", err.message);
     }
   };
 
   useEffect(() => {
     getData(`https://taupe-dhole-boot.cyclic.app/cars/getcar/${car_id}`);
     const days = JSON.parse(localStorage.getItem("Days"));
-    setArpit(days);
+    if (days == null) {
+      let d = {
+        days: 1,
+      };
+      setArpit(d);
+    } else {
+      setArpit(days);
+    }
   }, [car_id]);
 
-  console.log(data);
+  getData();
+
   return (
     <div>
       <Flex mx="100px" mt="30px" justifyContent={"space-between"} gap="10px">
@@ -210,7 +220,9 @@ function CheckoutPage() {
                           letterSpacing="0.4px"
                           color="#a8a8a8"
                         >
-                          Amount: {Number(data.price) * Number(arpit.days)}
+                          Amount:{" "}
+                          {Number(data.price) *
+                            Number(arpit.days ? arpit.days : 1)}
                         </Text>
                       </Box>
                       <Flex
@@ -678,7 +690,8 @@ function CheckoutPage() {
               letterSpacing="0.24px"
               color="#1f1f1f"
             >
-              Final fare :  {data.price}/day * {arpit.days}days ={Number(data.price) * Number(arpit.days)} INR
+              Final fare : {data.price}/day * {arpit.days}days =
+              {Number(data.price) * Number(arpit.days)} INR
             </Text>
             <Button
               onClick={() =>
